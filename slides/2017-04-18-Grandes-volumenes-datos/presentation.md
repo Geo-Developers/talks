@@ -1,7 +1,7 @@
 <!-- .slide: class="title" -->
 
 ## Grandes volúmenes de datos en ArcGIS
-Marta Dávila () & Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
+Marta Dávila ([@marta_davila](https://twitter.com/marta_davila)) & Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
 
 [bit.ly/BigArcGIS](#)
 
@@ -11,12 +11,13 @@ Marta Dávila () & Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
 
 ### Motivación
 
-Aprender a mejorar:
-* Rendimiento
+> Aprender cómo crear apps que consuman grandes volúmenes de datos y que sean usables usando ArcGIS.
+
+* Rendimiento:
   * Tiempos (transferencia datos, primera carga, ...)
   * Consumo de recursos (CPU, memoria & HD)
   * etc.
-* Usabilidad
+* Usabilidad:
   * Legibilidad de la información
   * Interactividad
   * etc.
@@ -40,9 +41,25 @@ Aprender a mejorar:
 
 ---
 
-### Intro
+<!-- .slide: class="section" -->
 
-Recursos:
+## ArcGIS Online
+
+[www.arcgis.com](http://www.arcgis.com)
+
+`Servicio en la nube gestionado por Esri`
+
+
+
+---
+
+<!-- .slide: class="agenda" -->
+
+### Recursos
+
+* [Awesome ArcGIS: ArcGIS Best Practices](https://esri-es.github.io/awesome-arcgis/arcgis/best-practices/performance/)
+* [The Million Points on a Map Problem - Advanced Techniques](https://www.youtube.com/watch?v=rMwZTlFAeg8)
+* [Drawing millions of features in ArcGIS: Advanced techniques](https://www.esri.com/training/catalog/57630434851d31e02a43ef39/drawing-millions-of-features-in-arcgis:-advanced-techniques/)
 
 ---
 
