@@ -3,7 +3,7 @@
 ## Grandes volúmenes de datos en ArcGIS
 Marta Dávila ([@marta_davila](//twitter.com/marta_davila)) & Raúl Jiménez ([@hhkaos](//twitter.com/hhkaos))
 
-[bit.ly/BigArcGIS](#)
+[bit.ly/BigArcGIS](http://bit.ly/BigArcGIS)
 
 ---
 
@@ -212,6 +212,7 @@ Generalizar:
 
 [<video src="videos/Animated3DMeshes.mp4" width="400" autoplay loop></video>](//coolmaps.esri.com/Dashboards/CrimeTrends/)
 [<video src="videos/GPU.mp4" width="400" autoplay loop></video>](//youtu.be/rG-rw1ZJBDc?t=16m41s)
+<img src="imgs/http2.png" style="padding:0;margin:0">
 
 ---
 
@@ -241,16 +242,14 @@ El resultado dependerá principalmente de:
 
 ---
 
-<!-- .slide: class="questions centered" -->
+<!-- .slide: class="centered" -->
 
 ## Questions?
 
-* Raul Jimenez:
-  * [twitter.com/hhkaos](//twitter.com/hhkaos)
-  * [github.com/hhkaos](//github.com/hhkaos)
-  * [youtube.com/hhkaos](//youtube.com/hhkaos)
+* Marta Dávila: marta.davida@esri.es
+* Raúl Jiménez: raul.jimenez@esri.es
 
-Slides: [esri-es.github.io/demos/2017/terraformer](//esri-es.github.io/demos/2017/terraformer)
+Slides: [bit.ly/BigArcGIS](http://bit.ly/BigArcGIS)
 
 ---
 
