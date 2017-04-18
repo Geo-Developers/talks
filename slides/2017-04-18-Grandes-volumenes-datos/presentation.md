@@ -174,14 +174,15 @@ Heatmap renderer con blur = 1 (ver: [web map](http://www.arcgis.com/home/webmap/
 
 > Consejo: generalizar polígonos
 
-API para  [generalizar](http://tasks.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer/generalize) ([documentación](http://resources.arcgis.com/en/help/rest/apiref/index.html?generalize.html))
+Generalizar:
+* [Mediante la API REST](http://tasks.arcgisonline.com/arcgis/rest/services/Geometry/GeometryServer/generalize) ([documentación](http://resources.arcgis.com/en/help/rest/apiref/index.html?generalize.html))
+* [Al vuelo con la API de JS](https://blogs.esri.com/esri/arcgis/2011/06/13/feature-layers-can-generalize-geometries-on-the-fly/)
 
 ![Img](//upload.wikimedia.org/wikipedia/commons/thumb/3/30/Douglas-Peucker_animated.gif/440px-Douglas-Peucker_animated.gif)
 
 [Algoritmo de Douglas-Peucker](//en.wikipedia.org/wiki/Ramer%E2%80%93Douglas%E2%80%93Peucker_algorithm)
 
-* Generalizar al vuelo con la API de JS
-https://blogs.esri.com/esri/arcgis/2011/06/13/feature-layers-can-generalize-geometries-on-the-fly/
+
 
 ---
 
@@ -189,9 +190,20 @@ https://blogs.esri.com/esri/arcgis/2011/06/13/feature-layers-can-generalize-geom
 
 ### Datos en tiempo real
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-ldX7RPAkug" frameborder="0" allowfullscreen></iframe>
+
 --
 
 ## Refresh o websockets
+
+* [Set refresh interval](http://doc.arcgis.com/en/arcgis-online/create-maps/set-refresh-interval.htm)
+* [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications)
+
+---
+
+<!-- .slide: class="section" -->
+
+### ArcGIS Enterprise
 
 ---
 
