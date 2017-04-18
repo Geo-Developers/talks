@@ -15,3 +15,8 @@ Angular
 HTML5
 <div dojoType="foo.bar.baz"></div>
 <div data-dojo-type="foo.bar.baz"></div>
+
+widgets- dijit
+shim
+require
+como se usa dojo internamente
