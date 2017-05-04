@@ -104,7 +104,7 @@ return company;
 
 <!-- .slide: class="section" -->
 
-### Datos: Silicon Valley ([overpass-turbo.eu](http://overpass-turbo.eu/))
+### Datos: Silicon Valley ([overpass](http://overpass-turbo.eu/) + [web map](https://hhkaos2.maps.arcgis.com/home/webmap/viewer.html?webmap=ed54d70a03964b878b25f7d5c37e4b15)
 
 ```
 [out:json][timeout:200];
@@ -161,7 +161,7 @@ Demo renderers: [Open Data Airbnb](https://hhkaos2.maps.arcgis.com/home/webmap/v
 
 * Raúl Jiménez: raul.jimenez@esri.es
 
-Slides: [bit.ly/BigArcGIS](http://bit.ly/BigArcGIS)
+[bit.ly/ArcadeArcGIS](http://bit.ly/ArcadeArcGIS)
 
 ---
 
