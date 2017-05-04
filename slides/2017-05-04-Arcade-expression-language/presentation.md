@@ -3,7 +3,7 @@
 ## Arcade Expression Language
 Raúl Jiménez ([@hhkaos](//twitter.com/hhkaos))
 
-[bit.ly/BigArcGIS](http://bit.ly/BigArcGIS)
+[bit.ly/ArcadeArcGIS](http://bit.ly/ArcadeArcGIS)
 
 ---
 
@@ -17,114 +17,48 @@ Raúl Jiménez ([@hhkaos](//twitter.com/hhkaos))
 
 ### Portable
 
-> Puede ser consumido desde: el `editor de mapa de ArcGIS Online, ArcGIS Pro`, etc. pero también desde las `SDKs y APIs`.
+> Puede ser consumido desde: el `editor de mapa/escenas de ArcGIS Online, ArcGIS Pro`, etc. pero también desde las `Runtime SDKs y JS API`.
 
----
+--
 
-<!-- .slide: class="section" -->
+### ¿Dónde se almacena?
 
-### Datos: Silicon Valley ([overpass-turbo.eu](http://overpass-turbo.eu/))
+[Web map](https://hhkaos2.maps.arcgis.com/sharing/rest/content/items/b7fa3ffb8b3c4a7a98c9bc1327d7dd84/data?f=json) / Web Scene [JSON Spec](https://developers.arcgis.com/web-map-specification/objects/labelExpressionInfo/)
 
 ```
-[out:json][timeout:200];
-(
-node["name"~"Evernote",i]({{bbox}});
-way["name"~"Evernote",i]({{bbox}});
-relation["name"~"Evernote",i]({{bbox}});
-
-node["name"~"facebook",i]({{bbox}});
-way["name"~"facebook",i]({{bbox}});
-relation["name"~"facebook",i]({{bbox}});
-
-node["name"~"linkedin",i]({{bbox}});
-way["name"~"linkedin",i]({{bbox}});
-relation["name"~"linkedin",i]({{bbox}});
-
-node["name"~"stanford",i]({{bbox}});
-way["name"~"stanford",i]({{bbox}});
-relation["name"~"stanford",i]({{bbox}});
-
-node["name"~"Apple, Inc",i]({{bbox}});
-way["name"~"Apple, Inc",i]({{bbox}});
-relation["name"~"Apple, Inc",i]({{bbox}});
-
-node["name"~"google",i]({{bbox}});
-way["name"~"google",i]({{bbox}});
-relation["name"~"google",i]({{bbox}});
-
-node["name"~"salesforce",i]({{bbox}});
-way["name"~"salesforce",i]({{bbox}});
-relation["name"~"salesforce",i]({{bbox}});
-
-node["name"~"twitter",i]({{bbox}});
-way["name"~"twitter",i]({{bbox}});
-relation["name"~"twitter",i]({{bbox}});
-
-node["name"~"vmware",i]({{bbox}});
-way["name"~"vmware",i]({{bbox}});
-relation["name"~"vmware",i]({{bbox}});
-
-node["name"~"adobe",i]({{bbox}});
-way["name"~"adobe",i]({{bbox}});
-relation["name"~"adobe",i]({{bbox}});
-
-node["name"~"ebay",i]({{bbox}});
-way["name"~"ebay",i]({{bbox}});
-relation["name"~"ebay",i]({{bbox}});
-
-node["name"~"netflix",i]({{bbox}});
-way["name"~"netflix",i]({{bbox}});
-relation["name"~"netflix",i]({{bbox}});
-
-node["name"~"Yahoo",i]({{bbox}});
-way["name"~"Yahoo",i]({{bbox}});
-relation["name"~"Yahoo",i]({{bbox}});
-
-node["name"~"cisco",i]({{bbox}});
-way["name"~"cisco",i]({{bbox}});
-relation["name"~"cisco",i]({{bbox}});
-
-node["name"~"intel",i]({{bbox}});
-way["name"~"intel",i]({{bbox}});
-relation["name"~"intel",i]({{bbox}});
-
-node["name"~"ricoh",i]({{bbox}});
-way["name"~"ricoh",i]({{bbox}});
-relation["name"~"ricoh",i]({{bbox}});
-
-node["name"~"microsoft",i]({{bbox}});
-way["name"~"microsoft",i]({{bbox}});
-relation["name"~"microsoft",i]({{bbox}});
-
-node["name"~"ibm",i]({{bbox}});
-way["name"~"ibm",i]({{bbox}});
-relation["name"~"ibm",i]({{bbox}});
-
-node["name"~"amazon",i]({{bbox}});
-way["name"~"amazon",i]({{bbox}});
-relation["name"~"amazon",i]({{bbox}});
-);
-// print results
-out body;
->;
-out skel qt;
+{
+  visualVariables: [
+    {
+      type: "sizeInfo",
+      field: null,
+      valueExpression: "1-($feature.availability_365/365)",
+      valueExpressionTitle: "Unavailability_365",
+      valueUnit: "unknown",
+      minSize: 6,
+      maxSize: 15,
+      minDataValue: 0.4300000000000001,
+      maxDataValue: 1
+    },
+    {
+      type: "transparencyInfo",
+      valueExpression: "$feature[\"price\"]/$feature[\"max_price\"]; return strength;",
+      stops: [
+        {
+          value: 50,
+          transparency: 85
+        },
+        {
+          value: 97,
+          transparency: 0
+        }
+      ],
+      legendOptions: {
+        title: "Strength of predominance"
+      }
+    }
+  ]
+}
 ```
-
----
-
-<!-- .slide: class="section" -->
-
-### ArcGIS Online
-
-demo
-
----
-
-<!-- .slide: class="section" -->
-
-### ArcGIS API for JS
-
-demo
 
 ---
 
@@ -137,6 +71,87 @@ demo
 
 +500 [awesome lists](https://github.com/search?utf8=%E2%9C%93&q=topic%3Aawesome-list&type=Repositories) on Github
 
+
+---
+
+<!-- .slide: class="funciones" -->
+
+#
+
+--
+
+<!-- .slide: class="section" -->
+
+### Ejemplos
+
+```
+Round($feature.POP2012/$feature.POP2010, 2)
+Average($feature.AGE_20_24, $feature.AGE_25_34,$feature.AGE_34_44)
+
+
+var company = 'Unknown';
+var companies = ['Google', 'Facebook', 'Evernote', 'LinkedIn', 'Stanford'];
+for(var k in companies) {
+    Console('log the value of a variable here: ', companies[k])    
+    if(Find(companies[k], $feature.name, 0) != -1){
+      company = companies[k];
+    }   
+}
+return company;
+```
+
+---
+
+<!-- .slide: class="section" -->
+
+### Datos: Silicon Valley ([overpass-turbo.eu](http://overpass-turbo.eu/))
+
+```
+[out:json][timeout:200];
+(
+
+node["name"~"facebook",i]({{bbox}});
+way["name"~"facebook",i]({{bbox}});
+relation["name"~"facebook",i]({{bbox}});
+
+...
+
+node["name"~"google",i]({{bbox}});
+way["name"~"google",i]({{bbox}});
+relation["name"~"google",i]({{bbox}});
+
+// print results
+out body;
+>;
+out skel qt;
+```
+
+---
+
+<!-- .slide: class="section" -->
+
+### ArcGIS Online
+
+Demo renderers: [Open Data Airbnb](https://hhkaos2.maps.arcgis.com/home/webmap/viewer.html?webmap=b17278b4a3e448ccb44b94e24e56726f)
+
+---
+
+<!-- .slide: class="section" -->
+
+### ArcGIS API for JS
+
+* Create a renderer using Arcade Expressions - [3.x](https://jsbin.com/gobore/edit?html,output) - [4.x](https://jsbin.com/hugilun/edit?html,output)
+* [Label features using Arcade expressions - 3.x](https://jsbin.com/vugagit/edit?html,output)
+
+---
+
+<!-- .slide: class="section" -->
+
+### ArcGIS Pro
+
+<iframe src="//hhkaos.github.io/youtube-embed-portion/?v=X6_x3SbTeZU&s=11m23s&e=13m55s&m=true" width="560" height="315"></iframe>
+
+> Personalizando etiquetas y renderizadores
 
 ---
 
