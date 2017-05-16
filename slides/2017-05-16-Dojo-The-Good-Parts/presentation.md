@@ -157,3 +157,32 @@ var dojoConfig = { parseOnLoad: true }
 ---
 
 ### Forms
+
+* [Botones](https://mundogister.github.io/Seminario_Dojo/dijit/form/buttons.html)
+   * `dijit.form.Button`
+   * `dijit.form.DropDownButton`
+   * `dijit.form.ComboButton`
+   * `dijit.form.ToggleButton`
+
+
+
+* [Entrada de texto](https://mundogister.github.io/Seminario_Dojo/dijit/form/text_areas.html)
+
+   *  `dijit.form.SimpleTextarea`
+   *  `dijit.form.Textarea`
+
+
+
+* [Selectores](https://mundogister.github.io/Seminario_Dojo/dijit/form/select_widgets.html)
+   *  `dijit.form.Select`
+   *  `dijit.form.ComboBox`
+   *  `dijit.form.MultiSelect`
+   *  `dijit.form.FilteringSelect`   
+
+* [Varios](https://mundogister.github.io/Seminario_Dojo/dijit/form/Form.html)
+   * `dijit.form.Form`
+   * `dijit.form.HorizontalSlider`
+   * `dijit.form.VerticalSlider`
+   * `dijit.form.CheckBox`
+   * `dijit.form.RadioButton`
+   * `dijit.form.DataList`
