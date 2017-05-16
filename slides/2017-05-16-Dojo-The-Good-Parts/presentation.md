@@ -5,6 +5,8 @@ Carlos Herrera ([@MundoGister](https://twitter.com/MundoGister))
 
 Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
 
+[bit.ly/DojoGoodParts](http://bit.ly/DojoGoodParts)
+
 ---
 
 <!-- .slide: class="section" -->
@@ -234,14 +236,83 @@ var dojoConfig = { parseOnLoad: true }
 
 [Chuleta o cheatsheet](http://porkteinspira.com/wp-content/uploads/2014/08/pork_chuleta_updated.png)
 
----
+--
+
+### Declarar un módulo - [Live](http://esri-es.github.io/iniciacion-a-dojo/tutoriales/declarar-un-modulo/) - [Doc](https://github.com/esri-es/iniciacion-a-dojo/tree/master/tutoriales/declarar-un-modulo/)
+
+```js
+define([
+    'dojo/dom',
+    'dojo/fx'
+  ],function(dom,fx){
+    return {
+      html: function(id, value){
+        dom.byId(id).innerHTML = value;
+      },
+      get: function(id){
+        return dom.byId(id).innerHTML;
+      },
+      move: function(id, top, left){
+        fx.slideTo({
+          node: id,
+          top: top,
+          left: left
+        }).play();
+      }
+    };
+  });
+```
+
+--
+
+### Declarar un widget - [Live sample](http://esri-es.github.io/iniciacion-a-dojo/tutoriales/declarar-un-widget/) - [Doc](https://github.com/esri-es/iniciacion-a-dojo/tree/master/tutoriales/declarar-un-widget)
+
+```js
+define([
+  "dojo/_base/declare",
+  "dojo/dom-construct",
+  "dijit/_WidgetBase"
+  ],function(declare, domConstruct, _WidgetBase){
+
+    return declare([_WidgetBase], {
+
+      constructor: function(opt){
+          this._i = opt.init || 0;
+
+          if(!opt.id){
+            console.error("Debes especificar un id del elemento");
+            return -1;
+          }
+          this._id = opt.id;
+      },
+
+      buildRendering: function(){
+        // create the DOM for this widget
+        this.domNode = domConstruct.create("button", {innerHTML: this._i});
+        domConstruct.place(this.domNode, this._id);
+      },
+
+      postCreate: function(){
+        // every time the user clicks the button, increment the counter
+        this.connect(this.domNode, "onclick", "increment");
+      },
+
+      increment: function(){
+        this.domNode.innerHTML = ++this._i;
+      }
+
+    });
+});
+```
+
+--
 
 ### Uso de Dojo en ArcGIS
 
 * [Carga una capa](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=layers-featurelayer) (ni rastro de Dojo)
 * [Scene goTo](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=scene-goto) (dojo/query, dojo/on)
 
----
+--
 
 ## AMD, CommonJS & ES2015
 
@@ -270,11 +341,6 @@ HTML5:
 <div data-title="My Dialog"></div>
 ```
 
-
---
-
-## Web Components vs Widgets
-
 --
 
 ## Dojo 2
@@ -284,3 +350,20 @@ HTML5:
 * [Widget](https://github.com/dojo/widget-core) + state & [exportable](https://github.com/dojo/widget-core/commit/137d28ffc98c556d017dbbc1c9344025a7acb691) to Web Components
 
 > [Intro to Dojo2 with ArcGIS API for JavaScript](http://odoe.net/blog/intro-dojo2-arcgis-api-javascript/)
+
+---
+
+<!-- .slide: class="centered" -->
+
+## ¿Preguntas?
+
+* Raúl Jiménez: raul.jimenez@esri.es
+
+* Carlos Herrera: carlos.herrera@esri.es
+
+[bit.ly/DojoGoodParts](http://bit.ly/DojoGoodParts)
+
+---
+
+<!-- .slide: class="end" -->
+#
