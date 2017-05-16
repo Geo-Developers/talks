@@ -7,6 +7,18 @@ Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
 
 ---
 
+<!-- .slide: class="section" -->
+
+## Historia
+
+* 1993 - 1999:  Nada
+* 1999: AJAX (IE5, Netscape, Opera, Konqueror, ...)
+* 2001 - 2005:  Flash por todos lados (acceso a la cam, micro), muchos hacks
+* 2006 - 2009
+* 2010 - Hoy -> Boom!
+
+---
+
 <img src="https://docs.google.com/drawings/d/1qkrltkfDoJWpWOHz32Lfz2RIXtwTFWwSz0KsNLiBpTo/pub?w=1164&h=855" style="width:70%">
 
 ---
@@ -213,6 +225,21 @@ var dojoConfig = { parseOnLoad: true }
    * `dijit.form.CheckBox`
    * `dijit.form.RadioButton`
    * `dijit.form.DataList`
+
+---
+
+### Equivalencias: Vanilla <-> jQuery <-> Dojo
+
+[![Chuleta](./imgs/pork_chuleta_updated.png)](https://github.com/esri-es/iniciacion-a-dojo/tree/master/recursos/cheatsheet)
+
+[Chuleta o cheatsheet](http://porkteinspira.com/wp-content/uploads/2014/08/pork_chuleta_updated.png)
+
+---
+
+### Uso de Dojo en ArcGIS
+
+* [Carga una capa](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=layers-featurelayer) (ni rastro de Dojo)
+* [Scene goTo](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=scene-goto) (dojo/query, dojo/on)
 
 ---
 
