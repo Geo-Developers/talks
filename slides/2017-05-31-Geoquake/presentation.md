@@ -1,369 +1,485 @@
-<!-- .slide: class="title" -->
 
-## Geoquake: Widgets
-Carlos Herrera ([@MundoGister](https://twitter.com/MundoGister))
+<!-- .slide: class="section" -->
 
-Raúl Jiménez ([@hhkaos](https://twitter.com/hhkaos))
-
-[bit.ly/DojoGoodParts](http://bit.ly/DojoGoodParts)
+## Desarrollo de los widgets
 
 ---
 
-<!-- .slide: class="problems" -->
+<!-- .slide: class="section" -->
 
-## Historias
-
-* 1993 - 1999:  Nada
-* 1999: AJAX (IE5, Netscape, Opera, Konqueror, ...)
-* 2001 - 2005:  Flash por todos lados (acceso a la cam, micro), muchos hacks
-* 2006 - 2009
-* 2010 - Hoy -> Boom!
-
----
-
-<img src="https://docs.google.com/drawings/d/1qkrltkfDoJWpWOHz32Lfz2RIXtwTFWwSz0KsNLiBpTo/pub?w=1164&h=855" style="width:70%">
-
----
-
-### Dojo Already did that
-
-<div style="position:relative;height:0;padding-bottom:56.25%"><iframe src="https://www.youtube.com/embed/BY0-AI1Sxy0?ecver=2" width="640" height="360" frameborder="0" style="position:absolute;width:70%;height:70%;left:50%;margin-left:-35%;" allowfullscreen></iframe></div>
-
-> [JSConfUS 2013 Peter Higgins: #dadt (Dojo already did that)](https://www.youtube.com/watch?v=BY0-AI1Sxy0&t=569s)
-
----
-
-### Introducción Dojo Toolkit
+## Widget de Cálculo de Seguros
+[Demo]()
+![Widget seguro](images/rutasWidget.png)
 
 --
 
-### Antecedentes
-   * Alex Russell lo empezó en 2004
-   * Comunidad muy activa en el proyecto
-   * En 2005 contribuciones > equipo de desarrolladores
-   * Empresas que usan Dojo: Cisco, IBM, Esri, etc.
+## Widget de Cálculo de Seguros
+
+* Estableciendo los settings
+	![initConfigQueryWidget](images/initConfigQueryWidget.png)
 
 --
 
- * [dojo](https://dojotoolkit.org/reference-guide/1.10/dojo/index.html#dojo-index) - Core. Tiene distintas funcionalidades (manipular DOM, llamadas AJAX, etc)
- * [dijit](https://dojotoolkit.org/reference-guide/1.10/dijit/index.html#dijit-index) - Interfaces de usuario
- * [dojox](https://dojotoolkit.org/reference-guide/1.10/dojox/index.html#dojox-index) - Funcionalidad basada en los módulos anteriores
- * [utils](https://dojotoolkit.org/reference-guide/1.10/util/index.html#util-index) - Herramientas de apoyo
+### Settings del Cálculo de Seguros
+
+* Crear html
+* getConfig (Almacenar parámetros)
+* setConfig (parámetros durante setting)
+
 
 --
 
-### Primeros pasos
+### Settings del Cálculo de Seguros
 
-  * CDN: <br>&lt;script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"&gt;&lt;/script&gt;
-  * `define` y `require`
-  * [Hola Mundo!](https://github.com/MundoGister/Seminario_Dojo/blob/gh-pages/holamundo_dojo.html)
+* Interfaz de Configuración:
+  - Left-Panel
+  - Central-Panel
 
 --
 
-### Animaciones y efectos
+### HTML
 
-   * Animaciones y efectos `dojo/_base/fx`
+ * Left-Panel
+
+```HTML
+<fieldset class="well-left form-horizontal">
+	<div class="form-group">
+		<div class="collapse">
+				<button class="btn btn-primary" data-dojo-attach-event="onclick: onClick_Descripcion" data-dojo-props="title: 'Descripción'" type="button">Descripción</button>
+				<div class="panelbody" data-dojo-type="dijit/TitlePane" data-dojo-props="title: 'Parámetros de Entrada'">
+						<button class="btn obli" data-dojo-attach-event="onclick: onClick_Anio">
+								<label class= "control-label">Año de comienzo de la póliza</label>
+						</button>
+						...		 
+				</div>
+				<div class = "panelbody" data-dojo-type="dijit/TitlePane" data-dojo-props="title: 'Salida'">
+            <button id="salida" class="btn btn-primary" data-dojo-attach-event="onclick: onClick_Salida">
+                 <label class= "control-label">Capa de Salida</label>
+            </button>
+        </div>
+			</div>
+		</div>
+</fieldset>
 
 ```
-require(
-  ["dojo/_base/fx", "dojo/on", "dojo/dom", "dojo/domReady!"],
-  function(fx, on, dom) {
-    var fadeOutButton = dom.byId("fadeOutButton"),
-        fadeInButton = dom.byId("fadeInButton"),
-        fadeTarget = dom.byId("fadeTarget");
+--
+### HTML
 
-    on(fadeOutButton, "click", function(evt){
-        fx.fadeOut({ node: fadeTarget }).play();
-    });
-    on(fadeInButton, "click", function(evt){
-        fx.fadeIn({ node: fadeTarget }).play();
-    });
-  }
-);
+ * Central-Panel
+ 	- Interfaz de Descripción del widget
+
+```HTML
+<fieldset class="well-left form-horizontal">
+	<div class="form-group" id="interfacedescription">
+    <h4 class="contact-subtitle-1" id="title"><i class="fa fa-map"></i>&nbsp;   Finalidad</h4>
+    <p>Cálculo del Seguro de Hogar</p>
+    <h4 class="contact-subtitle-1"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp; Descripción</h4>
+    <p>El objetivo del widget es obtener el valor de la prima de Seguro de Hogar anual, teniendo en cuenta el factor de peligrosidad
+    de los edificios ante una catástrofe natural </p>
+  </div>
+	...
+</fieldset>
 ```
-[Ejemplo en funcionamiento](https://mundogister.github.io/Seminario_Dojo/effects/fade.html)
+--
+
+--
+### HTML
+
+* Central-Panel
+	- Interfaces de los parámetros de entrada. Diferenciamos entre parámetros obligatorios y opcionales mediante un * .
+
+--
+### HTML
+
+* Central-Panel/Parámetro Obligatorio
+
+```HTML
+<fieldset class="well-left form-horizontal">
+	<div class="form-group" id="interfaceanio">
+      <label class="col-md-6 control-label">Etiqueta: </label>
+      <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+              <input class="form-control" type="text" data-dojo-attach-point="insyear">
+          </div>
+      </div>
+      <label class="col-md-6 control-label">Información: </label>
+      <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+              <input class="form-control" type="text" data-dojo-attach-point="infoinsyear">
+          </div>
+      </div>
+      <label  class="col-md-6 control-label">Valor Predeterminado:</label>
+      <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+              <select class="form-control selectpicker" data-dojo-attach-point="valueinsyear">
+                  <option value="0" >Selecciona un año</option>
+                  <option value= "2015">2015</option>
+                  <option value = "2016">2016</option>
+                  <option value= "2017">2017</option>
+              </select>
+          </div>
+        </div>
+    </div>
+ ...
+</fieldset>
+```
+--
+### HTML
+
+* Central-Panel/Parámetro Opcional
+
+```HTML
+<fieldset class="well-left form-horizontal">
+	<div class="form-group" id="interfacetemporal">
+
+			...
+
+			<label class="col-md-6 control-label">Visible: </label>
+			<div class="col-md-6 inputGroupContainer">
+					<div class="input-group">
+						 <div class="onoffswitch">
+								<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="visitempo" data-dojo-attach-point="visibletemp" checked hidden>
+								<label class="onoffswitch-label" for="visitempo"><span class="onoffswitch-inner"></span><span class="onoffswitch-switch"></span></label>
+								</div>
+						</div>
+				</div>
+				<label class="col-md-6 control-label">Valor Predeterminado: </label>
+								<div class="col-md-6 inputGroupContainer move">
+										<div class="input-group">
+											<div class="radio-inline">
+													<label>
+															<input type="radio" name="inhabitabilidad" id = "temporal" value="true" data-dojo-attach-event="onclick:temporal" data-dojo-attach-point="covtempo"/> Si
+													</label>
+											</div>
+											<div class="radio-inline">
+													<label>
+															<input type="radio" name="inhabitabilidad" id = "temporal1" value="false" data-dojo-attach-event="onclick:temporal" checked data-dojo-attach-point="covtemporal"/> No
+													</label>
+											</div>
+										</div>
+								</div>
+								<label class="col-md-6 control-label">Valor de la cobertura: </label>
+								<div class="col-md-6 inputGroupContainer">
+										<div class="input-group">
+											<select name="temporal" class="form-control selectpicker" id="coberturetemporal" disabled data-dojo-attach-point="valuetemporalcoverage">
+											 <option value="0" >Selecciona un valor</option>
+											 <option value="1000">1.000€</option>
+											 <option value="5000">5.000€</option>
+											 <option value="10000">10.000€</option>
+											 <option value="20000">20.000€</option>
+											</select>
+										</div>
+								</div>
+						</div>
+ ...
+</fieldset>
+```
+--
+#### Establecer los parámetros
+
+* getConfig
+
+	* Parámetros del servicio
+	* Parámetros de la tabla
+	* Parámetros de los desplegables
 
 --
 
-### Efectos
-
-```
-require(
-  ["dojo/_base/fx", "dojo/on", "dojo/dom", "dojo/domReady!"],
-  function(baseFx, on, dom) {
-    var startButton = dom.byId("startButton"),
-    reverseButton = dom.byId("reverseButton"),
-    borderbox = dom.byId("borderbox");
-
-    // Establecemos el controlador on
-    on(startButton, "click", function(evt){
-      baseFx.animateProperty({
-        node: borderbox,
-        properties: { borderWidth: 100 }
-      }).play();
-    }
-  }
-);
-```
-
-[Ejemplo en funcionamiento](https://mundogister.github.io/Seminario_Dojo/effects/animateBorder.html)
-
 --
+#### setConfig
 
-### Combinar
+En caso de tener la configuración a medias, grandes proyectos
 
-```
-function swapAnim(node1, node2) {
-  var posn1 = parseInt(domStyle.get(node1, "left")),
-  posn2 = parseInt(domStyle.get(node2, "left"));
-
-  return moveNodes = fx.combine([
-    fx.slideTo({
-      duration: 1200,
-      node: node2,
-      left: posn1
-    }),
-    fx.slideTo({
-      duration: 1200,
-      node: node1,
-      left: posn2
-      })
-      ]);
-    }
-  ]);
+```JavaScript
+setConfig: function(config) {
+	this.config = config;
+	var options = config.inPanelVar.params;
+	// Load service URL if exisits
+	if (options && options.serviceUrl) {
+	    this.serviceUrl.set('value', options.serviceUrl);
+	};
+	return this.config;
+	},
 ```
 
 --
 
-### Combinar (2)
+### Parámetros de entrada:
+
+* Año comienzo de la poliza
+* Tipo de edificio
+* Año de construcción
+* Superficie de la vivienda
+* Peligrosidad
+* Tipo de material
+* Número de pisos
+* Valor de mercado
+* Deductible
+* ¿Cobertura de objetos frágiles?
+* ¿Cobertura de bienes personales?
+* Valor de cobertura de bienes personales
+* ¿Cobertura por inhabitabilidad temporal?
+* Valor de cobertura de inhabitabilidad temporal
+* ¿Es cliente nuestro?
+* Tipo de seguro contratado
+
+
+--
+
+
+### HTML
+
+* Form-group with select:
+
+```HTML
+<!-- Año de Poliza-->
+
+ <div class="form-group">
+		<label class="col-md-6 control-label" title="${config.infoiyear}">${config.iyear}</label>
+		<div class="col-md-6 selectContainer">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+				<select name="poliza" id ="anio" class="form-control selectpicker" title="${config.valueiyear}" >
+						<option value="0" >Selecciona un año</option>
+						<option id="2015" value="2015">2015</option>
+						<option id="2016" value="2016">2016</option>
+						<option id="2017" value="2017">2017</option>
+				</select>
+			</div>
+		</div>
+ </div>  
+```
+
+--
+
+* Form-group with text type input :
+
+
+```HTML
+<!-- Año construccion-->
+
+	<div class="form-group">
+		 <label class="col-md-6 control-label" title="${config.infocyear}">${config.cyear}</label>
+		 <div class="col-md-6 inputGroupContainer">
+				<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+					<input name="anio" id ="construccion" placeholder="Introduce un año" max="2014" min="1800" class="form-control" type="text" pattern="/[1][8|9][0-9][0-9]|[2][0][1][4]/" value="${config.valuecyear}">
+				</div>
+				<p class="help-block">${config.helpcyear}</p>
+			</div>
+	</div>
+```
+
+--
+
+* Form-group with radio type input:
+
+
+```HTML
+<!-- Cobertura objetos fragiles -->
+
+  <div class="form-group" id="${config.visobj}">
+     <label class="col-md-6 control-label" title="${config.infoobject}">${config.objecttext}</label>
+      <div class="col-md-6">
+         <div class="radio-inline">
+              <label>
+                  <input type="radio" name="objetos" id="objetos" ${config.object} value="true" /> Si
+              </label>
+          </div>
+          <div class="radio-inline">
+              <label>
+                  <input type="radio" name="objetos" id="objetos1" ${config.objection} value="false"/> No
+              </label>
+          </div>
+      </div>
+  </div>
+```
+
+--
+
+### HTML
+
+#### Botones:
+
+* Siguiente
+
+```HTML
+<!-- Button -->
+	<div class="form-group">
+			<label class="col-md-6 control-label">
+				 <div><img  class ="image" src="images/logo1.png"></div>
+			</label>
+			<div class="col-md-6">
+					<button id="next" class="btn btn-primary" data-dojo-attach-event="onclick:change"><span class="glyphicon glyphicon-play-circle"></span> Siguiente
+					</button>
+			</div>
+	</div>
+  ....
+```
+
+--
+
+* Anterior & Ejecutar
+
+```HTML
+<!-- Button -->
+	<div class="form-group">
+			<label class="col-md-6 control-label">
+         <div><img  class ="image" src="images/logo1.png"></div>
+      </label>
+			<div class="col-md-6">
+					<button id="before" class="btn btn-primary" data-dojo-attach-event="onclick:change"><span class="glyphicon glyphicon-play-circle"></span> Anterior
+					</button>
+					<button id="hotspotButton" class="btn btn-primary" data-dojo-attach-event="onclick:calcularseguro"><span class="glyphicon glyphicon-play-circle"></span> Ejecutar </button>
+			</div>
+	</div>
+```
+
+--
+
+### JavaScript
+
+Ciclo de vida del widget
+
+```JavaScript
+
+	postCreate: function() {
+		...
+	},
+	startup: function() {
+		...
+	},
+	onOpen: function() {
+		...
+	},
+	onClose: function() {
+		...
+	}
+```
+
+--
+
+### JavaScript
+
+Startup: Creamos el Geoproceso
+
+```JavaScript
+   	startup: function() {
+			var gpServiceUrl = "https://localhost:6443/arcgis/rest/services/Aseguradora/GPSeguros/GPServer/ScriptEdificios";
+		    this.gp = new Geoprocessor(gpServiceUrl);
+
+	      ...
+    	},
+```
+
+--
+
+### JavaScript
+
+Otras funciones definidas:
+ * Función que define los parámetros del cálculo del seguro
+
+	```JavaScript
+
+ 		calcularseguro:function(){
+ 		...
+         },
+	```
+
+--
+
+### JavaScript
+
+Otras funciones definidas:
+ * Función que te permite recoger el resultado del geoproceso y pintarlo 	en el mapa
+ * Función para conocer el estado del geoproceso
+ * Función que en caso de que el servicio de geoproceso de error manda un mensaje alertando al usuario
+
+ ```JavaScript
+
+ 	gpJobComplete:function(){
+ 	...
+     },
+	 gpJobStatus:function(){
+	 ...
+	 },
+	 gpJobFailed:function(){
+	 ...
+	 },
+
+ ```
+
+--
+
+### JavaScript
+
+Otras funciones definidas:
+ * Función para hacer visible/no visible las interfaces en las que se ha dividido el formulario
+
+
+ ```JavaScript
+
+ 	change:function(){
+ 	...
+     },
 
 ```
-on(swapButton, "click", function(evt){
-
-  // chain the swap nodes animation
-  // with another to fade out a background color in our container
-  var anim = fx.chain([
-    swapAnim(c1, c2),
-    baseFx.animateProperty({
-      node: container,
-      properties: {
-        backgroundColor: "#fff"
-      }
-    })
-  ]);
-
-  // before the animation begins, set initial container background
-  aspect.before(anim, "beforeBegin", function(){
-    domStyle.set(container, "backgroundColor", "#eee");
-  });
-
-  // when the animation ends, toggle the originalOrder
-  on(anim, "End", function(n1, n2){
-    originalOrder = !originalOrder;
-  });
-
-  anim.play();
-});
-```
-
-[Ejemplo en funcionamiento](https://mundogister.github.io/Seminario_Dojo/effects/combine_chain.html)
 
 --
 
-### Dijit
+### JavaScript
 
-`dojo/parser` es un módulo opcional que se utiliza para convertir los nodos "decorados" en el DOM y convertirlos a dijits.
-```
-var dojoConfig = { parseOnLoad: true }
+Otras funciones definidas:
+ * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura de bienes personales en función de si deseo o no dicha covertura
+ * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura por inhabitabilidad temporal en función de si deseo o no dicha cobertura
+ * Función para habilitar/deshabilitar el campo correspondiente al tipo de seguro contratado en función de si el usuario desea que el análisis se produzca en edificios donde existen clientes de la compañia.
+
+
+ ```JavaScript
+
+ 	bienes:function(){
+ 	...
+     },
+	 temporal:function(){
+	 ...
+	 },
+	 cliente:function(){
+	 ...
+	 },
 
 ```
 
 --
 
-`dijit/layout` proporciona una serie de elementos para organizar nuestra interfaz.
-   * `dijit/layout/BorderContainer`
-   * `dijit/layout/ContentPane`
-   * `dijit/layout/AccordionContainer`
-   * `dijit/layout/AccordionPane`
-   * `dijit/layout/LayoutContainer`
-   * `dijit/layout/StackContainer`
-   * `dijit/layout/TabContainer`
+### JavaScript
 
---
-
-![Layouts](imgs/layoutBlock.png)
-
-[Layout blocks](https://dojotoolkit.org/reference-guide/1.10/_images/layoutBlock.png)
+Otras funciones definidas:
+  * Función para limpiar los resultados dibujados en el mapa y los mensajes del estado del geoproceso
 
 
---
+  ```JavaScript
 
-### Forms
-
-* [Botones](https://mundogister.github.io/Seminario_Dojo/dijit/form/buttons.html)
-   * `dijit.form.Button`
-   * `dijit.form.DropDownButton`
-   * `dijit.form.ComboButton`
-   * `dijit.form.ToggleButton`
-
-* [Entrada de texto](https://mundogister.github.io/Seminario_Dojo/dijit/form/text_areas.html)
-   *  `dijit.form.SimpleTextarea`
-   *  `dijit.form.Textarea`
-
---
-
-### Forms (2)
-
-* [Selectores](https://mundogister.github.io/Seminario_Dojo/dijit/form/select_widgets.html)
-   *  `dijit.form.Select`
-   *  `dijit.form.ComboBox`
-   *  `dijit.form.MultiSelect`
-   *  `dijit.form.FilteringSelect`   
-
-* [Varios](https://mundogister.github.io/Seminario_Dojo/dijit/form/Form.html)
-   * `dijit.form.Form`
-   * `dijit.form.HorizontalSlider`
-   * `dijit.form.VerticalSlider`
-   * `dijit.form.CheckBox`
-   * `dijit.form.RadioButton`
-   * `dijit.form.DataList`
-
----
-
-### Equivalencias: Vanilla <-> jQuery <-> Dojo
-
-[![Chuleta](./imgs/pork_chuleta_updated.png)](https://github.com/esri-es/iniciacion-a-dojo/tree/master/recursos/cheatsheet)
-
-[Chuleta o cheatsheet](http://porkteinspira.com/wp-content/uploads/2014/08/pork_chuleta_updated.png)
-
---
-
-### Declarar un módulo - [Live](http://esri-es.github.io/iniciacion-a-dojo/tutoriales/declarar-un-modulo/) - [Doc](https://github.com/esri-es/iniciacion-a-dojo/tree/master/tutoriales/declarar-un-modulo/)
-
-```js
-define([
-    'dojo/dom',
-    'dojo/fx'
-  ],function(dom,fx){
-    return {
-      html: function(id, value){
-        dom.byId(id).innerHTML = value;
+  	cleanup:function(){
+  	...
       },
-      get: function(id){
-        return dom.byId(id).innerHTML;
-      },
-      move: function(id, top, left){
-        fx.slideTo({
-          node: id,
-          top: top,
-          left: left
-        }).play();
-      }
-    };
-  });
-```
+
+  ```
 
 --
 
-### Declarar un widget - [Live sample](http://esri-es.github.io/iniciacion-a-dojo/tutoriales/declarar-un-widget/) - [Doc](https://github.com/esri-es/iniciacion-a-dojo/tree/master/tutoriales/declarar-un-widget)
 
-```js
-define([
-  "dojo/_base/declare",
-  "dojo/dom-construct",
-  "dijit/_WidgetBase"
-  ],function(declare, domConstruct, _WidgetBase){
+<!-- .slide: class="section" -->
 
-    return declare([_WidgetBase], {
+## Widget de consultas
 
-      constructor: function(opt){
-          this._i = opt.init || 0;
+[Demo]()
 
-          if(!opt.id){
-            console.error("Debes especificar un id del elemento");
-            return -1;
-          }
-          this._id = opt.id;
-      },
-
-      buildRendering: function(){
-        // create the DOM for this widget
-        this.domNode = domConstruct.create("button", {innerHTML: this._i});
-        domConstruct.place(this.domNode, this._id);
-      },
-
-      postCreate: function(){
-        // every time the user clicks the button, increment the counter
-        this.connect(this.domNode, "onclick", "increment");
-      },
-
-      increment: function(){
-        this.domNode.innerHTML = ++this._i;
-      }
-
-    });
-});
-```
+![Widget consultas](images/consultasWidget.png)
 
 --
 
-### Uso de Dojo en ArcGIS
 
-* [Carga una capa](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=layers-featurelayer) (ni rastro de Dojo)
-* [Scene goTo](https://developers.arcgis.com/javascript/latest/sample-code/sandbox/index.html?sample=scene-goto) (dojo/query, dojo/on)
 
---
 
-## AMD, CommonJS & ES2015
-
-* **AMD**: require.js & Dojo
-* **CommonJS**: Webpack, browserify, Node.js
-* **ES2015**: Babel, polyfills.
-
-> Blog post: [CommonJS vs AMD vs ES2015](https://auth0.com/blog/javascript-module-systems-showdown/)
-
---
-
-## Dojo declarative syntax
-
-Data-dojo-* ([2012](https://www.sitepen.com/blog/2012/01/19/html5-data-dojo-attribute-support/)):
-
-```html
-<div
-    data-dojo-type="foo.bar.baz"
-    data-dojo-props='title:"My Dialog", ...'>
-</div>
-```
-
-HTML5:
-
-```html
-<div data-title="My Dialog"></div>
-```
-
---
-
-## Dojo 2
-
-* [Typescript](https://www.typescriptlang.org/) (como Angular 2)
-* [PostCSS](http://postcss.org/)
-* [Widget](https://github.com/dojo/widget-core) + state & [exportable](https://github.com/dojo/widget-core/commit/137d28ffc98c556d017dbbc1c9344025a7acb691) to Web Components
-
-> [Intro to Dojo2 with ArcGIS API for JavaScript](http://odoe.net/blog/intro-dojo2-arcgis-api-javascript/)
-
----
-
-<!-- .slide: class="centered" -->
-
-## ¿Preguntas?
-
-* Raúl Jiménez: raul.jimenez@esri.es
-
-* Carlos Herrera: carlos.herrera@esri.es
-
-[bit.ly/DojoGoodParts](http://bit.ly/DojoGoodParts)
-
----
 
 <!-- .slide: class="end" -->
-#
