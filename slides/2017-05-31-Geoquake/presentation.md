@@ -10,7 +10,9 @@ Slides : [https://github.com/Geo-Developers/talks/tree/master/slides](https://go
 
 <!-- .slide: class="section" -->
 
-### Objetivos de este año
+## Objetivos de este año
+
+--
 
 - Crear una organización
 - Aplicaciones con soluciones GIS
@@ -65,7 +67,6 @@ Realizado por:
 
 ### Herramientas utilizadas
 
-
 - ArcMap - ArcPro
 - PyScripter
 - ArcGIS Server
@@ -96,7 +97,7 @@ Realizado por:
 
 <!-- .slide: class="section" -->
 
-## Arquitectura y versionado
+### Arquitectura y versionado
 
 Utilizada para la aplicación del cálculo del seguro y la aplicación del estado de los edificios, con el fin de actualizar la información del daño generado trás un terremoto a las aseguradoras.
 
@@ -108,7 +109,7 @@ Utilizada para la aplicación del cálculo del seguro y la aplicación del estad
   * SQL Server Manager
   	* Crear usuario con permisos de edición
 
---
+---
 
 <!-- .slide: class="section" -->
 
@@ -147,22 +148,51 @@ Se crean además cuatro tipos de restricciones para cada tipo de vehículo consi
 
 <!-- .slide: class="section" -->
 
-
 ### Cálculo del seguro
 
 Realiza el cálculo del seguro teniendo en cuenta los diversos factores que introduce el usuario y la peligrosidad del terreno.
 
-
-
 ---
 
-  <!-- .slide: class="section" -->
+<!-- .slide: class="section" -->
 
 ## Personalización del portal
 
 Se cambia la presentación del portal con un aspecto más corporativo.
 
+![Imagen de edición del portal](img/EditarAjustes.png)
 
+--
+
+### Personalización del portal
+#### Página de Inicio
+
+![Página de Inicio](img/EditarAjustes2.png)
+
+Editamos la descripción de nuestra portada, con datos de la empresa.
+
+--
+
+### Personalización del portal
+#### Página de Inicio | Código
+
+![Código de la Página de Inicio](img/codeAjustes.png)
+
+--
+
+### Personalización del portal
+#### Galería
+
+![Galería](img/ImagenPortal2.png)
+
+Editamos la imagen y el estilo de la página
+
+--
+
+### Personalización del portal
+#### Galería | Código
+
+![Código de Galería](img/codeImagen.png)
 
 ---
 
@@ -196,7 +226,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 ### Requires
 
 ![Bootstrap on require](img/BootstrapOnRequire.png)
-
 
 ---
 
@@ -264,6 +293,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 ##### Botones:
 
 * Ejecutar y Limpiar
+
 ```HTML
 <!-- Buttons -->
 <div class="col-md-12">
@@ -271,6 +301,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 	<button class="btn btn-primary" data-dojo-attach-event="onclick:clear"><span class="glyphicon glyphicon-stop-circle"></span> Limpiar </button>
 </div>
   ....
+
 ```
 
 --
@@ -302,7 +333,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 ```
 
 --
-
 
 ### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
@@ -375,7 +405,7 @@ onOpen: function() {
 
 Otras funciones definidas que corresponden a los botones:
 * Función de **Ejecutar**
-* Función de [**Limpiar**](#Función de Limpiar:)
+* Función de **Limpiar**
 
  ```JavaScript
 
@@ -388,7 +418,7 @@ clear: function() {
 
  ```
 
- --
+--
 
 ### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
@@ -500,7 +530,9 @@ function show(fsResult) {
 };
 
 ```
+
 --
+
 Por último dentro de la función **Ejecutar** solventamos posibles errores que puedan aparecer,
 
 ```JavaScript
@@ -516,14 +548,13 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 },
 
 ```
+
 --
 
 ### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
 ##### Función de Limpiar:
 Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede sin consultas.
-
-
 
 ---
 
@@ -556,20 +587,11 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
 
 --
 
-## Widget de Cálculo de Seguros
-
-* Estableciendo los settings
-	![initConfigQueryWidget](images/initConfigQueryWidget.png)
-
---
-
-
 ### Settings del Cálculo de Seguros
 
 * Crear html
 * getConfig (Almacenar parámetros)
 * setConfig (parámetros durante setting)
-
 
 --
 
@@ -607,6 +629,7 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
 </fieldset>
 
 ```
+
 --
 
 ### Settings del Cálculo de Seguros
@@ -627,9 +650,9 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
 	...
 </fieldset>
 ```
---
 
 --
+
 ### Settings del Cálculo de Seguros
 #### HTML
 
@@ -637,6 +660,7 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
 	- Interfaces de los parámetros de entrada.
 
 --
+
 ### Settings del Cálculo de Seguros
 #### HTML
 
@@ -672,7 +696,9 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
  ...
 </fieldset>
 ```
+
 --
+
 ### Settings del Cálculo de Seguros
 #### HTML
 
@@ -724,6 +750,7 @@ Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede 
  ...
 </fieldset>
 ```
+
 --
 
 ### Settings del Cálculo de Seguros
@@ -761,7 +788,6 @@ Ciclo de vida del widget
 
 --
 
---
 ### Settings del Cálculo de Seguros
 #### JAVASCRIPT
 
@@ -923,6 +949,7 @@ getConfig: function() {
 
 
 --
+
 ### Interfaz Usuario del Cálculo de Seguros
 #### HTML
 
