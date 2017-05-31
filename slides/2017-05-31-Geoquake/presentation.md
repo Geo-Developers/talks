@@ -180,7 +180,7 @@ Se cambia la presentación del portal con un aspecto más corporativo.
 
 https://github.com/tomwayson/web-appbuilder-bootstrap
 
-![Bootstrap GitHub repo](images/BootstrapGitHub.png)
+![Bootstrap GitHub repo](img/BootstrapGitHub.png)
 
 --
 
@@ -189,13 +189,13 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 * index.html
 * init.js
 
-![Bootstrap on init](images/BootstrapOnInit.png)
+![Bootstrap on init](img/BootstrapOnInit.png)
 
 --
 
 ### Requires
 
-![Bootstrap on require](images/BootstrapOnRequire.png)
+![Bootstrap on require](img/BootstrapOnRequire.png)
 
 
 ---
@@ -208,9 +208,216 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 <!-- .slide: class="section" -->
 
+## Widget de Estado de Edificios
+[![Demo App de Edificios](img/demoBus.png)](https://aicelm.github.io/Widget-RadioBusqueda/)
+
+---
+
+### Interfaz Usuario de Estado de Edificios
+#### HTML
+
+* Form-group with select:
+
+```HTML
+<!-- Seleción del Grado de Daño-->
+
+	<div class="form-group">
+		<label id="tipo" class="col-md-4 control-label">Tipo de Daño</label>
+			<div class="col-md-6 selectContainer">
+			<div class="input-group">
+					<span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+			<select id ="query" class="form-control selectpicker" >
+				<option value="0" >Selecciona un tipo de daño</option>
+				<option value= "Completo">Completo</option>
+				<option value = "Extenso">Extenso</option>
+				<option value= "Moderado">Moderado</option>
+				<option value= "Leve">Leve</option>
+			</select>
+		</div>
+```
+
+--
+
+* Form-group with range slider input :
+
+
+```HTML
+<!-- Selección del radio-->
+
+<div class="form-group">
+		<label id="radio" class="col-md-4 control-label">Radio de Búsqueda</label>
+			<div class="col-md-6 inputGroupContainer">
+			<div>
+					<div id="slider">
+						<input class="bar" type="range" id="distance" value="50" step="50" max="500" min="50" onchange="rangevalue.value=value" />
+						<output id="rangevalue">50</output>
+					</div>
+			</div>
+		</div>
+</div>
+```
+
+--
+
+### Interfaz Usuario de Estado de Edificios
+#### HTML
+##### Botones:
+
+* Ejecutar y Limpiar
+```HTML
+<!-- Buttons -->
+<div class="col-md-12">
+	<button class="btn btn-primary" data-dojo-attach-event="onclick:play"><span class="glyphicon glyphicon-play-circle"></span> Ejecutar </button>
+	<button class="btn btn-primary" data-dojo-attach-event="onclick:clear"><span class="glyphicon glyphicon-stop-circle"></span> Limpiar </button>
+</div>
+  ....
+```
+--
+
+### Interfaz Usuario de Estado de Edificios
+#### HTML
+##### Texto:
+
+* Entidades encontradas
+```HTML
+<div class="col-md-12" id="display">
+	<strong>Entidades encontradas: </strong><span class="stats" id="countResult"></span><br>
+</div>
+```
+
+--
+
+### Interfaz Usuario de Estado de Edificios
+#### HTML
+##### Texto:
+
+* Mensajes
+```HTML
+<!-- Mesajes y errores -->
+<div class="col-md-12">
+	<div id="next"></div>
+	<div id="error"></div>
+</div>
+```
+--
+
+### Interfaz Usuario de Estado de Edificios
+#### JavaScript
+
+Ciclo de vida del widget
+
+```JavaScript
+
+	onOpen: function() {
+		...
+	},
+	onClose: function() {
+		...
+	}
+```
+
+--
+
+### Interfaz Usuario de Estado de Edificios
+#### JavaScript
+
+OnOpen:  Añadimos todas las variables que utilizaremos a lo largo del widget
+
+
+```JavaScript
+//Init widget
+onOpen: function() {
+
+		//variables
+		window.$app = {
+				qBuild: this.qBuild,
+				qtBuild: this.qtBuild,
+				distance: this.distance,
+				damage: this.damage,
+				map: this.map,
+				graphicLayer: this.graphicLayer,
+				click: this.click,
+				stadtisctisDefinition: this.statisticDefinition
+		};
+},
+```
+
+--
+
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
+
+OnClose: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función
+
+	```JavaScript
+	//Close widget
+	onClose: function() {
+
+		window.$app.graphicLayer.clear();
+		window.$app.map.graphics.clear();
+		window.$app.click.remove();
+
+		document.getElementById('error').classList.remove('error');
+		dom.byId("rangevalue").value = 50;
+		dom.byId("distance").value = 50;
+		dom.byId("query").value =0;
+		dom.byId('countResult').innerHTML = 0;
+
+	}
+
+	```
+
+--
+
+### Interfaz Usuario de Estado de Seguros
+#### JavaScript
+
+Otras funciones definidas que corresponden a los botones:
+* Función de Ejecutar
+* Función de Limpiar
+
+ ```JavaScript
+
+ 	gpJobComplete:function(){
+ 	...
+     },
+	 gpJobStatus:function(){
+	 ...
+	 },
+	 gpJobFailed:function(){
+	 ...
+	 },
+
+ ```
+
+--
+
+<!-- .slide: class="section" -->
+
 ## Widget de Cálculo de Seguros
-[Demo]()
-![Widget seguro](images/rutasWidget.png)
+[![Demo App de Seguros](img/demoSeguro.png)](https://anmaro13.github.io/WebAppBuilder-Widgets/)
+
+--
+
+## Formulario Cálculo de Seguros
+### Parámetros de entrada:
+
+* Año comienzo de la poliza
+* Tipo de edificio
+* Año de construcción
+* Superficie de la vivienda
+* Peligrosidad
+* Tipo de material
+* Número de pisos
+* Valor de mercado
+* Deductible
+* ¿Cobertura de objetos frágiles?
+* ¿Cobertura de bienes personales?
+* Valor de cobertura de bienes personales
+* ¿Cobertura por inhabitabilidad temporal?
+* Valor de cobertura de inhabitabilidad temporal
+* ¿Es cliente nuestro?
+* Tipo de seguro contratado
 
 --
 
@@ -220,6 +427,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 	![initConfigQueryWidget](images/initConfigQueryWidget.png)
 
 --
+
 
 ### Settings del Cálculo de Seguros
 
@@ -238,9 +446,10 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### HTML
+### Settings del Cálculo de Seguros
+#### HTML
 
- * Left-Panel
+ * Left-Panel. Diferenciamos entre parámetros obligatorios y opcionales mediante un * .
 
 ```HTML
 <fieldset class="well-left form-horizontal">
@@ -264,7 +473,9 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 ```
 --
-### HTML
+
+### Settings del Cálculo de Seguros
+#### HTML
 
  * Central-Panel
  	- Interfaz de Descripción del widget
@@ -281,15 +492,18 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 	...
 </fieldset>
 ```
+--
 
 --
-### HTML
+### Settings del Cálculo de Seguros
+#### HTML
 
 * Central-Panel
-	- Interfaces de los parámetros de entrada. Diferenciamos entre parámetros obligatorios y opcionales mediante un * .
+	- Interfaces de los parámetros de entrada.
 
 --
-### HTML
+### Settings del Cálculo de Seguros
+#### HTML
 
 * Central-Panel/Parámetro Obligatorio
 
@@ -324,7 +538,8 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 </fieldset>
 ```
 --
-### HTML
+### Settings del Cálculo de Seguros
+#### HTML
 
 * Central-Panel/Parámetro Opcional
 
@@ -344,90 +559,237 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 						</div>
 				</div>
 				<label class="col-md-6 control-label">Valor Predeterminado: </label>
-								<div class="col-md-6 inputGroupContainer move">
-										<div class="input-group">
-											<div class="radio-inline">
-													<label>
-															<input type="radio" name="inhabitabilidad" id = "temporal" value="true" data-dojo-attach-event="onclick:temporal" data-dojo-attach-point="covtempo"/> Si
-													</label>
-											</div>
-											<div class="radio-inline">
-													<label>
-															<input type="radio" name="inhabitabilidad" id = "temporal1" value="false" data-dojo-attach-event="onclick:temporal" checked data-dojo-attach-point="covtemporal"/> No
-													</label>
-											</div>
-										</div>
+				<div class="col-md-6 inputGroupContainer move">
+						<div class="input-group">
+								<div class="radio-inline">
+										<label>
+												<input type="radio" name="inhabitabilidad" id = "temporal" value="true" data-dojo-attach-event="onclick:temporal" data-dojo-attach-point="covtempo"/> Si
+										</label>
 								</div>
-								<label class="col-md-6 control-label">Valor de la cobertura: </label>
-								<div class="col-md-6 inputGroupContainer">
-										<div class="input-group">
-											<select name="temporal" class="form-control selectpicker" id="coberturetemporal" disabled data-dojo-attach-point="valuetemporalcoverage">
+								<div class="radio-inline">
+										<label>
+											<input type="radio" name="inhabitabilidad" id = "temporal1" value="false" data-dojo-attach-event="onclick:temporal" checked data-dojo-attach-point="covtemporal"/> No
+										</label>
+								</div>
+							</div>
+					</div>
+					<label class="col-md-6 control-label">Valor de la cobertura: </label>
+					<div class="col-md-6 inputGroupContainer">
+							<div class="input-group">
+									<select name="temporal" class="form-control selectpicker" id="coberturetemporal" disabled data-dojo-attach-point="valuetemporalcoverage">
 											 <option value="0" >Selecciona un valor</option>
 											 <option value="1000">1.000€</option>
 											 <option value="5000">5.000€</option>
 											 <option value="10000">10.000€</option>
 											 <option value="20000">20.000€</option>
-											</select>
-										</div>
-								</div>
-						</div>
+									</select>
+							</div>
+					</div>
+	</div>
  ...
 </fieldset>
 ```
 --
-#### Establecer los parámetros
 
-* getConfig
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
 
-	* Parámetros del servicio
-	* Parámetros de la tabla
-	* Parámetros de los desplegables
-
---
-
---
-#### setConfig
-
-En caso de tener la configuración a medias, grandes proyectos
+Ciclo de vida del widget
 
 ```JavaScript
-setConfig: function(config) {
-	this.config = config;
-	var options = config.inPanelVar.params;
-	// Load service URL if exisits
-	if (options && options.serviceUrl) {
-	    this.serviceUrl.set('value', options.serviceUrl);
-	};
-	return this.config;
+
+	postCreate: function() {
+		...
+	},
+	startup: function() {
+		...
+	},
+	onOpen: function() {
+		...
+	},
+	onClose: function() {
+		...
+	}
+```
+
+--
+
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* config.json
+
+* Funciones a destacar dentro de la configuración del widget
+  * postCreate
+	* setConfig. Inicializa la configuración del widget
+	* getConfig. Devuelve los parámetros establecidos en la configuración
+
+--
+
+--
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* config.json
+
+```Json
+{
+  "iyear": "Año comienzo de poliza",
+  "infoiyear": "Año en que comienza la póliza de tu seguro",
+  "valueiyear": "2016",
+	...
 	},
 ```
 
 --
 
-### Parámetros de entrada:
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
 
-* Año comienzo de la poliza
-* Tipo de edificio
-* Año de construcción
-* Superficie de la vivienda
-* Peligrosidad
-* Tipo de material
-* Número de pisos
-* Valor de mercado
-* Deductible
-* ¿Cobertura de objetos frágiles?
-* ¿Cobertura de bienes personales?
-* Valor de cobertura de bienes personales
-* ¿Cobertura por inhabitabilidad temporal?
-* Valor de cobertura de inhabitabilidad temporal
-* ¿Es cliente nuestro?
-* Tipo de seguro contratado
+* postCreate
 
+```JavaScript
+postCreate: function() {
+      this.setConfig(this.config);
+    },
+```
 
 --
 
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
 
-### HTML
+* setConfig
+
+```JavaScript
+setConfig: function(config) {
+
+	this.insyear.value = config.iyear;
+  this.infoinsyear.value = config.infoiyear;
+  this.valueinsyear.value = config.valueiyear;
+	...
+	},
+```
+
+--
+
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* getConfig
+
+```JavaScript
+getConfig: function() {
+
+	return {
+        iyear: this.insyear.value,
+        infoiyear: this.infoinsyear.value,
+        valueiyear: this.valueinsyear.value
+				...
+			},
+	...
+	},
+```
+
+--
+
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* getConfig
+
+```JavaScript
+getConfig: function() {
+
+	var clientetextobjectButton= document.getElementById("visiclient");
+      if(clientetextobjectButton.checked){
+            this.visiblecliente.value = "optional7";
+            var visiblecli = this.visiblecliente.value;
+        }else{
+          this.visiblecliente.value = "optional8";
+          var visiblecli = this.visiblecliente.value;
+        }
+
+	return {
+				clientetext: this.clientecoverage.value,
+				infocliente: this.infoclientecoverage.value,
+				client: visiblecli
+				...
+			},
+	...
+	},
+```
+
+--
+
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* getConfig
+
+```JavaScript
+getConfig: function() {
+
+	var ClienteButtons= document.getElementsByName("cliente");
+        if(ClienteButtons[0].value==="true"){
+            if(ClienteButtons[0].checked){
+              this.covclien.value = "checked";
+              this.covcliente.value = " ";
+              var cli = this.covclien.value;
+              var clie = this.covcliente.value;
+            }
+        }
+        if(ClienteButtons[1].value==="false"){
+            if(ClienteButtons[1].checked){
+              this.covclien.value = " ";
+              this.covcliente.value = "checked";
+              var cli = this.covclien.value;
+              var clie = this.covcliente.value;
+            }
+        }
+
+	return {
+				clientetext: this.clientecoverage.value,
+				infocliente: this.infoclientecoverage.value,
+				client: visiblecli,
+				clien: cli,
+				cliente: clie
+				...
+			},
+	...
+	},
+```
+
+--
+
+### Settings del Cálculo de Seguros
+#### JAVASCRIPT
+
+* Otras Funciones definidas
+ - Funciones para habilitar/deshabilitar campos en función de otros:
+ 			- bienes
+			- temporal
+			- cliente
+ - Funciones para modificar la interfaz de Central-Panel:
+ 			- onClick_Descripcion
+			- onClick_Anio
+			- onClick_Edificio
+			- onClick_Construccion
+			- onClick_Superficie
+			- onClick_Peligrosidad
+			- onClick_Material
+			- onClick_Pisos
+			- onClick_Mercado
+			- onClick_Deductible
+			- onClick_Objetos
+			- onClick_Personales
+			- onClick_Temporal
+			- onClick_Cliente
+
+
+--
+### Interfaz Usuario del Cálculo de Seguros
+#### HTML
 
 * Form-group with select:
 
@@ -497,9 +859,9 @@ setConfig: function(config) {
 
 --
 
-### HTML
-
-#### Botones:
+### Interfaz Usuario del Cálculo de Seguros
+#### HTML
+##### Botones:
 
 * Siguiente
 
@@ -537,7 +899,8 @@ setConfig: function(config) {
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Ciclo de vida del widget
 
@@ -559,7 +922,8 @@ Ciclo de vida del widget
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Startup: Creamos el Geoproceso
 
@@ -574,7 +938,28 @@ Startup: Creamos el Geoproceso
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
+
+OnOpen:  Ocultamos la capa total de edifcios
+OnClose: Hacemos visible la capa total de edificios
+
+```JavaScript
+		onOpen: function(){
+			var share = this.map.getLayer("Edificios_seguro_165");
+			share.hide();
+		},
+
+		onClose: function(){
+			var share = this.map.getLayer("Edificios_seguro_165");
+			share.show();
+		},
+```
+
+--
+
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Otras funciones definidas:
  * Función que define los parámetros del cálculo del seguro
@@ -588,7 +973,8 @@ Otras funciones definidas:
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Otras funciones definidas:
  * Función que te permite recoger el resultado del geoproceso y pintarlo 	en el mapa
@@ -611,7 +997,8 @@ Otras funciones definidas:
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Otras funciones definidas:
  * Función para hacer visible/no visible las interfaces en las que se ha dividido el formulario
@@ -627,7 +1014,8 @@ Otras funciones definidas:
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Otras funciones definidas:
  * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura de bienes personales en función de si deseo o no dicha covertura
@@ -651,7 +1039,8 @@ Otras funciones definidas:
 
 --
 
-### JavaScript
+### Interfaz Usuario del Cálculo de Seguros
+#### JavaScript
 
 Otras funciones definidas:
   * Función para limpiar los resultados dibujados en el mapa y los mensajes del estado del geoproceso
@@ -666,7 +1055,6 @@ Otras funciones definidas:
   ```
 
 --
-
 
 <!-- .slide: class="end" -->
 
