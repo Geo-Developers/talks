@@ -34,7 +34,7 @@ Se pretende:
 
 <!-- .slide: class="section" -->
 
-### Presentación
+### Presentación del proyecto
 
 [![Soluciones GIS Geoquake](img/Portal1.png)](https://youtu.be/I8-m7GkOcso "Soluciones GIS Geoquake")
 
@@ -558,6 +558,23 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 #### JavaScript
 ##### Función de Limpiar:
 Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede sin consultas.
+
+```JavaScript
+//Btn clear
+clear: function() {
+
+	window.$app.graphicLayer.clear();
+	window.$app.map.graphics.clear();
+	window.$app.click.remove();
+
+	document.getElementById('error').classList.remove('error');
+	dom.byId("rangevalue").value = 50;
+	dom.byId("distance").value = 50;
+	dom.byId("query").value =0;
+	dom.byId('countResult').innerHTML = 0;
+},
+
+```
 
 ---
 
