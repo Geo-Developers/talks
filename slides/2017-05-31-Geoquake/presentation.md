@@ -1,3 +1,204 @@
+<!-- .slide: class="title" -->
+
+## Soluciones GIS Geoquake
+
+Proyecto Final de Máster 2017
+
+Slides : [https://github.com/Geo-Developers/talks/tree/master/slides](https://goo.gl/BzIZ9k)
+
+---
+
+<!-- .slide: class="section" -->
+
+### Objetivos de este año
+
+- Crear una organización
+- Aplicaciones con soluciones GIS
+
+--
+
+<!-- .slide: class="section" -->
+
+
+![Geoquake](img/B_GQpeque.png)
+
+Empresa ficticia que realiza estudios de ingeniería sísmica.
+
+Se pretende:
+- Dar visibilidad a este campo
+- Presentar posibles soluciones con los resultados obtenidos y utilizando la tecnología adecuada
+
+--
+
+<!-- .slide: class="section" -->
+
+### Presentación
+
+[![Soluciones GIS Geoquake](img/Portal1.png)](https://youtu.be/I8-m7GkOcso "Soluciones GIS Geoquake")
+
+Realizado por:
+[Andrea Martín](https://www.linkedin.com/in/monica-martigomez/) |
+[Monica Martí](https://www.linkedin.com/in/anmaro13/) |
+[Leticia Matas](https://www.linkedin.com/in/matasalvarezleticia/)
+
+---
+
+<!-- .slide: class="section" -->
+
+## Desarrollo del Proyecto
+
+--
+
+<!-- .slide: class="section" -->
+
+### Datos de partida
+
+* Registro de datos del [Grupo de Investigación de Ingeniría Sísmica (GIIS) - Escuela de Topografía (UPM) ](http://grupos.topografia.upm.es/sismo/)
+
+* Sección censal del portal de ["Datos abiertos de Lorca"](http://datos.lorca.es/catalogo/)
+
+* Viario de la ciudad de ["CartoCiudad"](http://www.cartociudad.es/visor/)
+
+--
+
+<!-- .slide: class="section" -->
+
+### Herramientas utilizadas
+
+
+- ArcMap - ArcPro
+- PyScripter
+- ArcGIS Server
+- Web AppBuilder
+
+--
+
+<!-- .slide: class="section" -->
+
+### Flujo de trabajo
+
+![Flujo de trabajo](img/flujo.PNG)
+
+--
+
+<!-- .slide: class="section" -->
+
+### Publicación de los servicios
+
+* ArcGIS Server
+* Desde la conexión Pública
+* Capas editables publicadas como Feature Service
+* Capas de información como Map Service
+* Herramientas de geoprocesos publicados como GPService
+	* Desde la ventana de resultados
+
+--
+
+<!-- .slide: class="section" -->
+
+## Arquitectura y versionado
+
+Utilizada para la aplicación del cálculo del seguro y la aplicación del estado de los edificios, con el fin de actualizar la información del daño generado trás un terremoto a las aseguradoras.
+
+* BBDD Corporativa
+  * Crear Enterprise GDB
+  * Versionado: Actualización del estado de los edificios
+  	* Versión default: Aplicación de Seguros
+  	* Versión techfield: Para que pueda actualizar el daño generado post-evento.
+  * SQL Server Manager
+  	* Crear usuario con permisos de edición
+
+--
+
+<!-- .slide: class="section" -->
+
+## Geoprocesamientos
+
+* Scripts de python:
+
+  * Calculo del factor p densidad - espacio
+  * Cáculo de rutas
+  * Cálculo del Seguro
+
+--
+
+<!-- .slide: class="section" -->
+
+### Cálculo del factor p
+
+Automatización del cálculo del factor p, que relaciona la densidad de población con el espacio.
+
+
+--
+
+<!-- .slide: class="section" -->
+
+
+### Cálculo de rutas
+
+Recalcula la ruta según la cantidad de escombros generados trás un terremoto.
+Se crean además cuatro tipos de restricciones para cada tipo de vehículo considerado:
+- Vehículo normal
+- Todoterreno
+- Ambulancia
+- Camión de bomberos
+
+--
+
+<!-- .slide: class="section" -->
+
+
+### Cálculo del seguro
+
+Realiza el cálculo del seguro teniendo en cuenta los diversos factores que introduce el usuario y la peligrosidad del terreno.
+
+
+
+---
+
+  <!-- .slide: class="section" -->
+
+## Personalización del portal
+
+Se cambia la presentación del portal con un aspecto más corporativo.
+
+
+
+---
+
+<!-- .slide: class="section" -->
+
+## Personalización de las aplicaciones
+
+
+---
+
+<!-- .slide: class="section" -->
+
+### Integración de Bootstrap en Web AppBuilder
+
+
+https://github.com/tomwayson/web-appbuilder-bootstrap
+
+![Bootstrap GitHub repo](images/BootstrapGitHub.png)
+
+--
+
+### Archivos necesarios
+
+* index.html
+* init.js
+
+![Bootstrap on init](images/BootstrapOnInit.png)
+
+--
+
+### Requires
+
+![Bootstrap on require](images/BootstrapOnRequire.png)
+
+
+---
 
 <!-- .slide: class="section" -->
 
@@ -80,7 +281,6 @@
 	...
 </fieldset>
 ```
---
 
 --
 ### HTML
@@ -468,17 +668,26 @@ Otras funciones definidas:
 --
 
 
-<!-- .slide: class="section" -->
-
-## Widget de consultas
-
-[Demo]()
-
-![Widget consultas](images/consultasWidget.png)
-
---
+<!-- .slide: class="end" -->
 
 
+---
+
+
+<!-- .slide: class="questions centered" -->
+
+## Contacto
+
+**Andrea**
+* GitHub : [anmaro13](https://github.com/anmaro13)
+* Linkedin: [Andrea Martín Rodríguez](https://www.linkedin.com/in/anmaro13)
+
+**Leticia**
+* GitHub : [aicelm](https://github.com/aicelm)
+* Linkedin: [Leticia Matas Álvarez](https://www.linkedin.com/in/matasalvarezleticia)
+* Twitter: [aicel_m](https://twitter.com/aicel_m)
+
+---
 
 
 
