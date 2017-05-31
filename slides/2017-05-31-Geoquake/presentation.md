@@ -230,13 +230,13 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 * index.html
 * init.js
 
-![Bootstrap on init](img/BootstrapOnInit.png)
+![Bootstrap on init](img/BootstrapOnInit0.png)
 
 --
 
 ### Requires
 
-![Bootstrap on require](img/BootstrapOnRequire.png)
+![Bootstrap on require](img/BootstrapRequire.png)
 
 ---
 
@@ -862,10 +862,10 @@ getConfig: function() {
 
 	var clientetextobjectButton= document.getElementById("visiclient");
       if(clientetextobjectButton.checked){
-            this.visiblecliente.value = "optional7";
+            this.visiblecliente.value = "optional9";
             var visiblecli = this.visiblecliente.value;
         }else{
-          this.visiblecliente.value = "optional8";
+          this.visiblecliente.value = "optional10";
           var visiblecli = this.visiblecliente.value;
         }
 
