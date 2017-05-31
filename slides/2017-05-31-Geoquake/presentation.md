@@ -269,7 +269,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 * Form-group with range slider input :
 
-
 ```HTML
 <!-- Selección del radio-->
 
@@ -491,7 +490,7 @@ Llamamos al **evento click** en el mapa y creamos la simbología. Ejecutamos la 
 #### JavaScript
 ###### Función de Ejecutar:
 
-Por último llamamos a la **función show**, donde damos la simbología a cada resultado.
+Llamamos a la **función show**, donde damos la simbología a cada resultado.
 
 ```JavaScript
 //Create show function to show the results of QueryTask
@@ -533,7 +532,11 @@ function show(fsResult) {
 
 --
 
-Por último dentro de la función **Ejecutar** solventamos posibles errores que puedan aparecer,
+### Interfaz Usuario de Radio de búsqueda
+#### JavaScript
+###### Función de Ejecutar:
+
+Por último dentro de la función solventamos posibles errores que puedan aparecer.
 
 ```JavaScript
 var text2 = document.getElementById('error');
