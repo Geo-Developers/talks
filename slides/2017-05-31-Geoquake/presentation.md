@@ -171,7 +171,7 @@ Se cambia la presentación del portal con un aspecto más corporativo.
 ## Personalización de las aplicaciones
 
 
----
+--
 
 <!-- .slide: class="section" -->
 
@@ -208,12 +208,12 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 <!-- .slide: class="section" -->
 
-## Widget de Estado de Edificios
+## Widget Radio de búsqueda
 [![Demo App de Edificios](img/demoBus.png)](https://aicelm.github.io/Widget-RadioBusqueda/)
 
----
+--
 
-### Interfaz Usuario de Estado de Edificios
+### Interfaz Usuario de Radio de búsqueda
 #### HTML
 
 * Form-group with select:
@@ -259,7 +259,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### Interfaz Usuario de Estado de Edificios
+### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Botones:
 
@@ -272,9 +272,10 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 </div>
   ....
 ```
+
 --
 
-### Interfaz Usuario de Estado de Edificios
+### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Texto:
 
@@ -287,7 +288,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### Interfaz Usuario de Estado de Edificios
+### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Texto:
 
@@ -299,9 +300,11 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 	<div id="error"></div>
 </div>
 ```
+
 --
 
-### Interfaz Usuario de Estado de Edificios
+
+### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
 
 Ciclo de vida del widget
@@ -318,10 +321,10 @@ Ciclo de vida del widget
 
 --
 
-### Interfaz Usuario de Estado de Edificios
+### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
 
-OnOpen:  Añadimos todas las variables que utilizaremos a lo largo del widget
+* **OnOpen**:  Añadimos todas las variables que utilizaremos a lo largo del widget
 
 
 ```JavaScript
@@ -344,12 +347,12 @@ onOpen: function() {
 
 --
 
-### Interfaz Usuario del Cálculo de Seguros
+### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
 
-OnClose: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función
+* **OnClose**: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función
 
-	```JavaScript
+```JavaScript
 	//Close widget
 	onClose: function() {
 
@@ -362,35 +365,167 @@ OnClose: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función
 		dom.byId("distance").value = 50;
 		dom.byId("query").value =0;
 		dom.byId('countResult').innerHTML = 0;
-
 	}
-
 	```
 
 --
 
-### Interfaz Usuario de Estado de Seguros
+### Interfaz Usuario de Radio de búsqueda
 #### JavaScript
 
 Otras funciones definidas que corresponden a los botones:
-* Función de Ejecutar
-* Función de Limpiar
+* Función de **Ejecutar**
+* Función de [**Limpiar**](#Función de Limpiar:)
 
  ```JavaScript
 
- 	gpJobComplete:function(){
+ play: function() {
  	...
      },
-	 gpJobStatus:function(){
-	 ...
-	 },
-	 gpJobFailed:function(){
+clear: function() {
 	 ...
 	 },
 
  ```
 
+ --
+
+### Interfaz Usuario de Radio de búsqueda
+#### JavaScript
+###### Función de Ejecutar:
+
+Creamos la **Query** y **QuerTask**, donde configuramos que valores queremos que se muestren.
+
+
+```JavaScript
+ window.$app.map.graphics.clear();
+
+ //Create Query and QuerTask
+ window.$app.qtBuild = new QueryTask("https://localhost:6443/arcgis/rest/services/Edificios/edificios/FeatureServer/0");
+ window.$app.qBuild = new Query();
+
+ //Search configuration
+ window.$app.qBuild.outFields = ["*"];
+ window.$app.qBuild.returnGeometry = true;
+
+ window.$app.damage = dom.byId("query").value;
+ window.$app.qBuild.where = "NB_GradoDaño = '" + window.$app.damage + "'";
+ window.$app.distance = dom.byId("distance").value;
+ window.$app.graphicLayer = new GraphicsLayer();
+ window.$app.map.addLayer(window.$app.graphicLayer);
+
+```
+
 --
+
+### Interfaz Usuario de Radio de búsqueda
+#### JavaScript
+###### Función de Ejecutar:
+
+Llamamos al **evento click** en el mapa y creamos la simbología. Ejecutamos la QueryTask.
+
+```JavaScript
+	 //Click event
+ 	window.$app.click = window.$app.map.on("click", function (evt) {
+
+ 			var text1 = document.getElementById('next');
+ 			text1.classList.remove("next");
+ 			while (text1.firstChild) {
+ 					text1.removeChild(text1.firstChild);
+ 			}
+
+ 			//Create circle
+ 			var circle = new Circle({
+ 					center: evt.mapPoint,
+ 					radius: window.$app.distance
+ 			});
+
+ 			// Configurate geometry search
+ 			window.$app.qBuild.geometry = circle;
+ 			window.$app.qBuild.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
+ 			var symbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, null, new Color([0.3, 0.3, 0.3, 0.2]));
+ 			var gr = new Graphic(circle, symbol);
+
+ 			window.$app.graphicLayer.clear();
+ 			window.$app.graphicLayer.add(gr);
+
+ 			//Execute QueryTask
+ 			window.$app.qtBuild.execute(window.$app.qBuild, show);
+ 	});
+
+```
+
+--
+
+### Interfaz Usuario de Radio de búsqueda
+#### JavaScript
+###### Función de Ejecutar:
+
+Por último llamamos a la **función show**, donde damos la simbología a cada resultado.
+
+```JavaScript
+//Create show function to show the results of QueryTask
+function show(fsResult) {
+
+		var features = fsResult.features;
+		window.$app.map.graphics.clear();
+
+		if (features.length != 0) {
+				if (window.$app.damage === "Completo") {
+						var fillsymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([1.0, 1.0, 1.0]), 1.5), new Color("#0c0c0c"));
+				} else if (window.$app.damage === "Extenso") {
+						var fillsymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([1.0, 1.0, 1.0]), 1.5), new Color("#de0e0e"));
+				} else if (window.$app.damage === "Moderado") {
+						var fillsymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([1.0, 1.0, 1.0]), 1.5), new Color("#eef222"));
+				} else if (window.$app.damage === "Leve") {
+						var fillsymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([1.0, 1.0, 1.0]), 1.5), new Color("#42e634"));
+				} else if (window.$app.damage === "0") {
+						var error = dom.byId("error");
+						error.className = 'error';
+						error.innerHTML = '<p> No se han encontrado edificios con este grado de daño en el rango de búsqueda </p>';
+				}
+		} else {
+				var error = dom.byId("error");
+				error.className = 'error';
+				error.innerHTML = '<p> No se han encontrado edificios con este grado de daño en el rango de búsqueda </p>';
+		}
+
+		for (var i = 0; i < features.length; i++) {
+				features[i].symbol = fillsymbol;
+				window.$app.map.graphics.add(features[i]);
+
+		var count = document.getElementById('countResult');
+		count.innerHTML = features.length;
+		};
+};
+
+```
+--
+Por último dentro de la función **Ejecutar** solventamos posibles errores que puedan aparecer,
+
+```JavaScript
+var text2 = document.getElementById('error');
+text2.classList.remove("error");
+while (text2.firstChild) {
+		text2.removeChild(text2.firstChild);
+};
+
+var text = dom.byId("next");
+text.className = 'next';
+text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
+},
+
+```
+--
+
+### Interfaz Usuario de Radio de búsqueda
+#### JavaScript
+##### Función de Limpiar:
+Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede sin consultas.
+
+
+
+---
 
 <!-- .slide: class="section" -->
 
