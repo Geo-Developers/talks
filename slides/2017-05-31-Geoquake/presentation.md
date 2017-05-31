@@ -10,9 +10,20 @@ Slides : [https://github.com/Geo-Developers/talks/tree/master/slides](https://go
 
 <!-- .slide: class="section" -->
 
-## Objetivos de este año
+## Presentaciones
 
---
+|||
+|:---:|:---:|
+|![Andrea](img/Andrea.PNG)|![Leticia](img/Leticia.png)|
+|[**Andrea Martín Rodriguez**](https://www.linkedin.com/in/anmaro13)|[**Leticia Matas Álvarez**](https://www.linkedin.com/in/matasalvarezleticia)|
+|Grado en Ingeniera del Medio Natural|Ingeniería técnica en Topografía|
+
+Ambas realizando las prácticas en el **Dpto. de Técnología e Inovación** trás cursar el **Máster GIS de ESRI**
+
+
+---
+
+## Objetivos de este año
 
 - Crear una organización
 - Aplicaciones con soluciones GIS
@@ -1207,6 +1218,7 @@ Otras funciones definidas:
 
 <!-- .slide: class="end" -->
 
+# Preguntas
 
 ---
 
