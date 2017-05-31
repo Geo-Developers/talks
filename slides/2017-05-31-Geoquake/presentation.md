@@ -287,7 +287,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Botones:
 
@@ -305,7 +304,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Texto:
 
@@ -318,7 +316,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
 #### HTML
 ##### Texto:
 
@@ -334,7 +331,7 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 --
 
 ### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
+#### JAVASCRIPT
 
 Ciclo de vida del widget
 
@@ -350,8 +347,8 @@ Ciclo de vida del widget
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
+
+#### JAVASCRIPT
 
 * **OnOpen**:  Añadimos todas las variables que utilizaremos a lo largo del widget
 
@@ -376,52 +373,49 @@ onOpen: function() {
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
+#### JAVASCRIPT
 
-* **OnClose**: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función
+* **OnClose**: Limpiamos el mapa y hacemos que deje de ejecutarse cualquier función. Coincide además con la función **Limpiar**.
 
 ```JavaScript
-	//Close widget
-	onClose: function() {
+//Close widget
+onClose: function() {
+	window.$app.graphicLayer.clear();
+	window.$app.map.graphics.clear();
+	window.$app.click.remove();
 
-		window.$app.graphicLayer.clear();
-		window.$app.map.graphics.clear();
-		window.$app.click.remove();
+	document.getElementById('error').classList.remove('error');
+	dom.byId("rangevalue").value = 50;
+	dom.byId("distance").value = 50;
+	dom.byId("query").value =0;
+	dom.byId('countResult').innerHTML = 0;
+}
 
-		document.getElementById('error').classList.remove('error');
-		dom.byId("rangevalue").value = 50;
-		dom.byId("distance").value = 50;
-		dom.byId("query").value =0;
-		dom.byId('countResult').innerHTML = 0;
-	}
 	```
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
+#### JAVASCRIPT
 
 Otras funciones definidas que corresponden a los botones:
 * Función de **Ejecutar**
-* Función de **Limpiar**
+* Función de **Limpiar** (como la función OnClose)
 
- ```JavaScript
+```JavaScript
 
- play: function() {
+play: function() {
  	...
      },
 clear: function() {
 	 ...
 	 },
 
- ```
+```
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
-###### Función de Ejecutar:
+#### JAVASCRIPT
+###### Función play:
 
 Creamos la **Query** y **QuerTask**, donde configuramos que valores queremos que se muestren.
 
@@ -447,9 +441,8 @@ Creamos la **Query** y **QuerTask**, donde configuramos que valores queremos que
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
-###### Función de Ejecutar:
+#### JAVASCRIPT
+###### Función play:
 
 Llamamos al **evento click** en el mapa y creamos la simbología. Ejecutamos la QueryTask.
 
@@ -486,9 +479,8 @@ Llamamos al **evento click** en el mapa y creamos la simbología. Ejecutamos la 
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
-###### Función de Ejecutar:
+#### JAVASCRIPT
+###### Función play:
 
 Llamamos a la **función show**, donde damos la simbología a cada resultado.
 
@@ -532,9 +524,8 @@ function show(fsResult) {
 
 --
 
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
-###### Función de Ejecutar:
+#### JAVASCRIPT
+###### Función play:
 
 Por último dentro de la función solventamos posibles errores que puedan aparecer.
 
@@ -548,30 +539,6 @@ while (text2.firstChild) {
 var text = dom.byId("next");
 text.className = 'next';
 text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
-},
-
-```
-
---
-
-### Interfaz Usuario de Radio de búsqueda
-#### JavaScript
-##### Función de Limpiar:
-Similar a la función OnClose, donde hacemos que todo el mapa se limpie y quede sin consultas.
-
-```JavaScript
-//Btn clear
-clear: function() {
-
-	window.$app.graphicLayer.clear();
-	window.$app.map.graphics.clear();
-	window.$app.click.remove();
-
-	document.getElementById('error').classList.remove('error');
-	dom.byId("rangevalue").value = 50;
-	dom.byId("distance").value = 50;
-	dom.byId("query").value =0;
-	dom.byId('countResult').innerHTML = 0;
 },
 
 ```
