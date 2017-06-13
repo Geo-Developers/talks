@@ -19,3 +19,8 @@ O ponentes sugeridos
 
 (30 min to one hour)
 (30 minutos a una hora)
+
+# Proposed dated / Fecha propuesta
+
+Check [our calendar](https://www.meetup.com/es-ES/Geo-Developers/events/) and proposed a date
+Comprueba [nuestro calendario](https://www.meetup.com/es-ES/Geo-Developers/events/) y propón una fecha
