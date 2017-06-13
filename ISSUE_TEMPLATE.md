@@ -2,9 +2,9 @@
 
 # Description / Descripción
 
-Describe de qué tecnologías vas a hablar, deja algunos links se lo consideras necesario y explica cual es el objetivo de la misma.
-
 Describe what technologies you are going to talk about, leave some links you consider necessary and explain what is the purpose of the talk.
+
+Describe de qué tecnologías vas a hablar, deja algunos links se lo consideras necesario y explica cual es el objetivo de la misma.
 
 # Speaker Bio / Bio del Ponente
 
@@ -14,9 +14,9 @@ Enlace al perfil en el [directorio de geo developers](http://geodevelopers.org/m
 
 # Level / Nivel
 
-(Beginner, Intermediate, Advanced), requisitos mínimos/recomendados
+(Beginner, Intermediate, Advanced), minimum/recomended requirements
 
-(Iniciación, Intermedio, Avanzado), minimum/recomended requirements
+(Iniciación, Intermedio, Avanzado), requisitos mínimos/recomendados
 
 # Duration / Duración
 
