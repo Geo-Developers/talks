@@ -15,7 +15,7 @@ Slides : [https://github.com/Geo-Developers/talks/tree/master/slides](https://go
 |||
 |:---:|:---:|
 |![Andrea](img/Andrea.PNG)|![Leticia](img/Leticia.png)|
-|[**Andrea Martín Rodríguez**](https://www.linkedin.com/in/anmaro13)|[**Leticia Matas Álvarez**](https://www.linkedin.com/in/matasalvarezleticia)|
+|[**Andrea Martín Rodriguez**](https://www.linkedin.com/in/anmaro13)|[**Leticia Matas Álvarez**](https://www.linkedin.com/in/matasalvarezleticia)|
 |Grado en Ingeniera del Medio Natural|Ingeniería técnica en Topografía|
 
 Ambas realizando las prácticas en el **Dpto. de Técnología e Inovación** trás cursar el **Máster GIS de ESRI**
@@ -50,8 +50,8 @@ Se pretende:
 [![Soluciones GIS Geoquake](img/Portal1.png)](https://youtu.be/I8-m7GkOcso "Soluciones GIS Geoquake")
 
 Realizado por:
-[Andrea Martín](https://www.linkedin.com/in/anmaro13/) |
-[Monica Martí](https://www.linkedin.com/in/monica-martigomez/) |
+[Andrea Martín](https://www.linkedin.com/in/monica-martigomez/) |
+[Monica Martí](https://www.linkedin.com/in/anmaro13/) |
 [Leticia Matas](https://www.linkedin.com/in/matasalvarezleticia/)
 
 ---
@@ -229,13 +229,13 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 * index.html
 * init.js
 
-![Bootstrap on init](img/BootstrapOnInit0.png)
+![Bootstrap on init](img/BootstrapOnInit.png)
 
 --
 
 ### Requires
 
-![Bootstrap on require](img/BootstrapRequire.png)
+![Bootstrap on require](img/BootstrapOnRequire.png)
 
 ---
 
@@ -248,8 +248,6 @@ https://github.com/tomwayson/web-appbuilder-bootstrap
 <!-- .slide: class="section" -->
 
 ## Widget Radio de búsqueda
-* Repositorio : [Widget-RadioBusqueda](https://github.com/aicelm/Widget-RadioBusqueda)
-
 [![Demo App de Edificios](img/demoBus.png)](https://aicelm.github.io/Widget-RadioBusqueda/)
 
 --
@@ -560,8 +558,6 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 <!-- .slide: class="section" -->
 
 ## Widget de Cálculo de Seguros
-* Repositorio : [Widget-CalculoSeguro](https://github.com/anmaro13/WebAppBuilder-Widgets)
-
 [![Demo App de Seguros](img/demoSeguro.png)](https://anmaro13.github.io/WebAppBuilder-Widgets/)
 
 --
@@ -577,12 +573,6 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 * Tipo de material
 * Número de pisos
 * Valor de mercado
-
---
-
-## Formulario Cálculo de Seguros
-### Parámetros de entrada:
-
 * Deductible
 * ¿Cobertura de objetos frágiles?
 * ¿Cobertura de bienes personales?
@@ -612,6 +602,7 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 
 ### Settings del Cálculo de Seguros
 #### HTML
+
  * Left-Panel. Diferenciamos entre parámetros obligatorios y opcionales mediante un * .
 
 ```HTML
@@ -625,8 +616,13 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 						</button>
 						...		 
 				</div>
+				<div class = "panelbody" data-dojo-type="dijit/TitlePane" data-dojo-props="title: 'Salida'">
+            <button id="salida" class="btn btn-primary" data-dojo-attach-event="onclick: onClick_Salida">
+                 <label class= "control-label">Capa de Salida</label>
+            </button>
+        </div>
+			</div>
 		</div>
-	</div>
 </fieldset>
 
 ```
@@ -635,18 +631,19 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 
 ### Settings del Cálculo de Seguros
 #### HTML
+
  * Central-Panel
  	- Interfaz de Descripción del widget
 
 ```HTML
 <fieldset class="well-left form-horizontal">
-		<div class="form-group" id="interfacedescription">
-		    <h4 class="contact-subtitle-1" id="title"><i class="fa fa-map"></i>&nbsp;   Finalidad</h4>
-		    <p>Cálculo del Seguro de Hogar</p>
-		    <h4 class="contact-subtitle-1"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp; Descripción</h4>
-		    <p>El objetivo del widget es obtener el valor de la prima de Seguro de Hogar anual, teniendo en cuenta el factor de peligrosidad
-		    de los edificios ante una catástrofe natural </p>
-	  </div>
+	<div class="form-group" id="interfacedescription">
+    <h4 class="contact-subtitle-1" id="title"><i class="fa fa-map"></i>&nbsp;   Finalidad</h4>
+    <p>Cálculo del Seguro de Hogar</p>
+    <h4 class="contact-subtitle-1"><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp; Descripción</h4>
+    <p>El objetivo del widget es obtener el valor de la prima de Seguro de Hogar anual, teniendo en cuenta el factor de peligrosidad
+    de los edificios ante una catástrofe natural </p>
+  </div>
 	...
 </fieldset>
 ```
@@ -663,8 +660,8 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 
 ### Settings del Cálculo de Seguros
 #### HTML
+
 * Central-Panel/Parámetro Obligatorio
-* [Código completo](https://github.com/anmaro13/WebAppBuilder-Widgets/blob/master/SeguroES/setting/Setting.html#L68)
 
 ```HTML
 <fieldset class="well-left form-horizontal">
@@ -681,8 +678,19 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
               <input class="form-control" type="text" data-dojo-attach-point="infoinsyear">
           </div>
       </div>
-				...
+      <label  class="col-md-6 control-label">Valor Predeterminado:</label>
+      <div class="col-md-6 inputGroupContainer">
+          <div class="input-group">
+              <select class="form-control selectpicker" data-dojo-attach-point="valueinsyear">
+                  <option value="0" >Selecciona un año</option>
+                  <option value= "2015">2015</option>
+                  <option value = "2016">2016</option>
+                  <option value= "2017">2017</option>
+              </select>
+          </div>
+        </div>
     </div>
+ ...
 </fieldset>
 ```
 
@@ -692,12 +700,13 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 #### HTML
 
 * Central-Panel/Parámetro Opcional
-* [Código completo](https://github.com/anmaro13/WebAppBuilder-Widgets/blob/master/SeguroES/setting/Setting.html#L431)
 
 ```HTML
 <fieldset class="well-left form-horizontal">
 	<div class="form-group" id="interfacetemporal">
+
 			...
+
 			<label class="col-md-6 control-label">Visible: </label>
 			<div class="col-md-6 inputGroupContainer">
 					<div class="input-group">
@@ -707,8 +716,35 @@ text.innerHTML = '<p> Selecciona la zona de búsqueda </p>';
 								</div>
 						</div>
 				</div>
-					...
+				<label class="col-md-6 control-label">Valor Predeterminado: </label>
+				<div class="col-md-6 inputGroupContainer move">
+						<div class="input-group">
+								<div class="radio-inline">
+										<label>
+												<input type="radio" name="inhabitabilidad" id = "temporal" value="true" data-dojo-attach-event="onclick:temporal" data-dojo-attach-point="covtempo"/> Si
+										</label>
+								</div>
+								<div class="radio-inline">
+										<label>
+											<input type="radio" name="inhabitabilidad" id = "temporal1" value="false" data-dojo-attach-event="onclick:temporal" checked data-dojo-attach-point="covtemporal"/> No
+										</label>
+								</div>
+							</div>
+					</div>
+					<label class="col-md-6 control-label">Valor de la cobertura: </label>
+					<div class="col-md-6 inputGroupContainer">
+							<div class="input-group">
+									<select name="temporal" class="form-control selectpicker" id="coberturetemporal" disabled data-dojo-attach-point="valuetemporalcoverage">
+											 <option value="0" >Selecciona un valor</option>
+											 <option value="1000">1.000€</option>
+											 <option value="5000">5.000€</option>
+											 <option value="10000">10.000€</option>
+											 <option value="20000">20.000€</option>
+									</select>
+							</div>
+					</div>
 	</div>
+ ...
 </fieldset>
 ```
 
@@ -825,10 +861,10 @@ getConfig: function() {
 
 	var clientetextobjectButton= document.getElementById("visiclient");
       if(clientetextobjectButton.checked){
-            this.visiblecliente.value = "optional9";
+            this.visiblecliente.value = "optional7";
             var visiblecli = this.visiblecliente.value;
         }else{
-          this.visiblecliente.value = "optional10";
+          this.visiblecliente.value = "optional8";
           var visiblecli = this.visiblecliente.value;
         }
 
@@ -887,35 +923,27 @@ getConfig: function() {
 ### Settings del Cálculo de Seguros
 #### JAVASCRIPT
 
-* Otras Funciones definidas:
-
+* Otras Funciones definidas
  - Funciones para habilitar/deshabilitar campos en función de otros:
  			- bienes
 			- temporal
 			- cliente
+ - Funciones para modificar la interfaz de Central-Panel:
+ 			- onClick_Descripcion
+			- onClick_Anio
+			- onClick_Edificio
+			- onClick_Construccion
+			- onClick_Superficie
+			- onClick_Peligrosidad
+			- onClick_Material
+			- onClick_Pisos
+			- onClick_Mercado
+			- onClick_Deductible
+			- onClick_Objetos
+			- onClick_Personales
+			- onClick_Temporal
+			- onClick_Cliente
 
---
-
-### Settings del Cálculo de Seguros
-#### JAVASCRIPT
-
-* Otras Funciones definidas:
-
-	 - Funciones para modificar la interfaz de Central-Panel:
-			 	- onClick_Descripcion
-				- onClick_Anio
-				- onClick_Edificio
-				- onClick_Construccion
-				- onClick_Superficie
-				- onClick_Peligrosidad
-				- onClick_Material
-				- onClick_Pisos
-				- onClick_Mercado
-				- onClick_Deductible
-				- onClick_Objetos
-				- onClick_Personales
-				- onClick_Temporal
-				- onClick_Cliente
 
 --
 
@@ -926,6 +954,7 @@ getConfig: function() {
 
 ```HTML
 <!-- Año de Poliza-->
+
  <div class="form-group">
 		<label class="col-md-6 control-label" title="${config.infoiyear}">${config.iyear}</label>
 		<div class="col-md-6 selectContainer">
@@ -946,6 +975,7 @@ getConfig: function() {
 
 * Form-group with text type input :
 
+
 ```HTML
 <!-- Año construccion-->
 
@@ -964,6 +994,7 @@ getConfig: function() {
 --
 
 * Form-group with radio type input:
+
 
 ```HTML
 <!-- Cobertura objetos fragiles -->
@@ -1069,8 +1100,8 @@ Startup: Creamos el Geoproceso
 ### Interfaz Usuario del Cálculo de Seguros
 #### JavaScript
 
-* OnOpen:  Ocultamos la capa total de edifcios
-* OnClose: Hacemos visible la capa total de edificios
+OnOpen:  Ocultamos la capa total de edifcios
+OnClose: Hacemos visible la capa total de edificios
 
 ```JavaScript
 		onOpen: function(){
@@ -1103,6 +1134,7 @@ Otras funciones definidas:
 
 ### Interfaz Usuario del Cálculo de Seguros
 #### JavaScript
+
 Otras funciones definidas:
  * Función que te permite recoger el resultado del geoproceso y pintarlo 	en el mapa
  * Función para conocer el estado del geoproceso
@@ -1143,19 +1175,12 @@ Otras funciones definidas:
 
 ### Interfaz Usuario del Cálculo de Seguros
 #### JavaScript
+
 Otras funciones definidas:
- * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura de bienes personales en función de si deseo o no dicha cobertura.
-
- * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura por inhabitabilidad temporal en función de si deseo o no dicha cobertura.
-
+ * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura de bienes personales en función de si deseo o no dicha covertura
+ * Función para habilitar/deshabilitar el campo correspondiente al valor de la cobertura por inhabitabilidad temporal en función de si deseo o no dicha cobertura
  * Función para habilitar/deshabilitar el campo correspondiente al tipo de seguro contratado en función de si el usuario desea que el análisis se produzca en edificios donde existen clientes de la compañia.
 
---
-
-### Interfaz Usuario del Cálculo de Seguros
-#### JavaScript
-
-* [Código completo](https://github.com/anmaro13/WebAppBuilder-Widgets/blob/master/SeguroES/Widget.js#L17)
 
  ```JavaScript
 
@@ -1169,7 +1194,7 @@ Otras funciones definidas:
 	 ...
 	 },
 
-	```
+```
 
 --
 
@@ -1192,7 +1217,7 @@ Otras funciones definidas:
 
 <!-- .slide: class="end" -->
 
-
+# Preguntas
 
 ---
 
